@@ -5,36 +5,34 @@ import axios from "axios";
 const API_URL = "http://localhost:5005";
 
 function SignupPage(props) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
-    const [errorMessage, setErrorMessage] = useState(undefined);
-  
-    const navigate = useNavigate();
-    
-    const handleEmail = (e) => setEmail(e.target.value);
-    const handlePassword = (e) => setPassword(e.target.value);
-    const handleName = (e) => setName(e.target.value);
-  
-    
-    const handleSignupSubmit = (e) => {
-      e.preventDefault()
-  
-      const newUser = {email,password,name}
-  
-      //send post request to /auth/signup to my server
-  
-      axios.post('http://localhost:5005/auth/signup',newUser) 
-      .then(()=>{
-        
-          navigate('/')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const navigate = useNavigate();
+
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+  const handleName = (e) => setName(e.target.value);
+
+  const handleSignupSubmit = (e) => {
+    e.preventDefault();
+
+    const newUser = { email, password, name };
+
+    //send post request to /auth/signup to my server
+
+    axios
+      .post("http://localhost:5005/auth/signup", newUser)
+      .then(() => {
+        navigate("/");
       })
       .catch((error) => {
-          //const errorDescription = error.response.data.message;
-          //setErrorMessage(errorDescription);
-        })
-  
-    };
+        //const errorDescription = error.response.data.message;
+        //setErrorMessage(errorDescription);
+      });
+  };
   return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
