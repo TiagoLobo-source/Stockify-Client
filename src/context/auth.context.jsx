@@ -31,7 +31,9 @@ function AuthProviderWrapper(props) {
         { headers: { Authorization: `Bearer ${storedToken}`} }
       )
       .then((response) => {
+        console.log ("dasd")
         console.log(response.data)
+        console.log ("dasd2")
         // If the server verifies that the JWT token is valid  
         const user = response.data;
        // Update state variables        

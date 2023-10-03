@@ -9,9 +9,12 @@ function SignupPage(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-
+  const [userPermission, setUserPermission] = useState('user');
   const navigate = useNavigate();
 
+  const handleOptionChange = (event) => {
+    setUserPermission(event.target.value);};
+  
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
@@ -19,7 +22,7 @@ function SignupPage(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = { email, password, name };
+    const newUser = { email, password, name , userPermission };
 
     //send post request to /auth/signup to my server
 
@@ -51,9 +54,36 @@ function SignupPage(props) {
 
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
+        <div>
+      <h2>Select an option:</h2>
+      <div>
+        <input
+          type="radio"
+          id="user"
+          name="userPermission"
+          value="user"
+          checked={userPermission === 'user'}
+          onChange={handleOptionChange}
+        />
+        <label htmlFor="user">User</label>
+      </div>
+      <div>
+        <input
+          type="radio"
+          id="supplier"
+          name="userPermission"
+          value="supplier"
+          checked={userPermission === 'supplier'}
+          onChange={handleOptionChange}
+        />
+        <label htmlFor="supplier">Supplier</label>
+      </div>
 
+      <p>Selected option: {userPermission}</p>
+    </div>
         <button type="submit">Sign Up</button>
       </form>
+      
     </div>
   );
 }
