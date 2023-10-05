@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import AddProduct from "./AddProduct";
 import productsService from "../services/ProductsService";
+import SeeDetails from "./SeeDetails";
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -44,13 +45,16 @@ function ProductsList() {
 
   return (
     <div className="ProductsListPage">
-      <AddProduct getProducts={getProducts}></AddProduct>
       {products.map((oneProduct) => {
         return (
           <div className="ProductCard card" key={oneProduct._id}>
-            <h3>{oneProduct.title}</h3>
-            {/* <Link to={`/products/${oneProduct._id}`}>
-                                               </Link>*/}
+            <Link to={`/seedetails/${oneProduct._id}`}>
+              <h3>{oneProduct.title}</h3>
+              <h3>{oneProduct.description}</h3>
+              <h3>{oneProduct.price}</h3>
+              <h3>{oneProduct.stock}</h3>
+              <h3>{oneProduct.imageProduct}</h3>
+            </Link>
             <button
               onClick={() => {
                 deleteProduct(oneProduct._id);
