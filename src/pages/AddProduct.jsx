@@ -11,6 +11,8 @@ function AddProducts(props) {
   const [price, setPrice] = useState(0);
   const [imageProduct, setImageProduct] = useState("");
   const [description, setDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
 
  const {user} = useContext(AuthContext);
 
@@ -24,7 +26,7 @@ function AddProducts(props) {
     //axios.post("http://localhost:5005/api/products", newProduct)
     
     .then(() => {
-      alert("Product successfully Created");
+     // alert("Product successfully Created");
      // props.getProducts();
       console.log(props);
       setTitle("");
@@ -32,7 +34,13 @@ function AddProducts(props) {
       setStock(0);
       setPrice(0);
       setImageProduct("");
-    });
+    }
+    )
+    .catch((error) => {
+        console.error("Server Error:", error.response.data);
+        setErrorMessage(error.response.data.message)
+      });
+    
   }
   //console.log(props);
   console.log("1dsadsasdasdasdasdasdsa")
@@ -98,6 +106,7 @@ function AddProducts(props) {
         </label>
 
         <button>Submit</button>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </form>
     </div>
   );

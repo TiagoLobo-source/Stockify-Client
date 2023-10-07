@@ -32,8 +32,19 @@ function SignupPage(props) {
         navigate("/");
       })
       .catch((error) => {
-        //const errorDescription = error.response.data.message;
-        //setErrorMessage(errorDescription);
+        if (error.response) {
+          // The request was made, and the server responded with an error status code (e.g., 4xx or 5xx)
+          console.error("Server Error:", error.response.data);
+          // You can set the error message state here or handle it as needed
+        } else if (error.request) {
+          // The request was made but no response was received (e.g., network error)
+          console.error("Network Error:", error.request);
+          // Handle the network error as needed
+        } else {
+          // Something else happened while setting up the request
+          console.error("Error:", error.message);
+          // Handle other errors as needed
+        }
       });
   };
   return (

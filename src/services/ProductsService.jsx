@@ -30,17 +30,17 @@ class ProductsService {
   };
  
   // GET /api/products/:id
-  getProject(id){
+  getProduct(id){
     return this.api.get(`/api/products/${id}`);
   };
  
   // PUT /api/products/:id
-  updateProject = (id, requestBody) => {
+  updateProduct = (id, requestBody) => {
     return this.api.put(`/api/products/${id}`, requestBody);
   };
  
   // DELETE /api/products/:id
-  deleteProject = id => {
+  deleteProduct = id => {
     return this.api.delete(`/api/products/${id}`);
   };
 }

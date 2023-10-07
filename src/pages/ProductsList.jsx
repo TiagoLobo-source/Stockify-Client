@@ -3,12 +3,16 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import AddProduct from "./AddProduct";
 import productsService from "../services/ProductsService";
-import SeeDetails from "./SeeDetails";
+import ProductDetailsPage from "./ProductDetailsPage";
+import { AuthContext } from "../context/auth.context";
+import { useContext } from "react";
 
 function ProductsList() {
+  const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const path = useLocation();
-  console.log(path);
+  const idOwner = console.log(path);
   function getProducts() {
     //fetch the data for all projects when the component first loads
 
@@ -22,6 +26,15 @@ function ProductsList() {
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
+
+        console.log("*********");
+        console.log(user);
+        console.log("*********");
+
+        const filtered = response.data.filter(
+          (oneProduct) => oneProduct.idOwner === user._id
+        );
+        setFilteredProducts(filtered);
       })
       .catch((err) => {
         console.log(err);
@@ -45,10 +58,10 @@ function ProductsList() {
 
   return (
     <div className="ProductsListPage">
-      {products.map((oneProduct) => {
+      {filteredProducts.map((oneProduct) => {
         return (
           <div className="ProductCard card" key={oneProduct._id}>
-            <Link to={`/seedetails/${oneProduct._id}`}>
+            <Link to={`/productdetailspage/${oneProduct._id}`}>
               <h3>{oneProduct.title}</h3>
               <h3>{oneProduct.description}</h3>
               <h3>{oneProduct.price}</h3>
