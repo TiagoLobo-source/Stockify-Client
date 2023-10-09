@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
+
 function Navbar() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   return (
@@ -21,7 +22,7 @@ function Navbar() {
    
       {user.userPermission === "user" && (
         <>
-          <Link to="/">
+          <Link to="/products">
             <button>Products</button>
           </Link>
           <Link to="/">

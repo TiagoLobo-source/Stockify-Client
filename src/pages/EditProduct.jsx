@@ -3,17 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsService from '../services/ProductsService'
 
-//2 steps
-
-//1. get the initial data to be updated by the user
-//2. when the user submits we send a put request to change the data
-
-
-
-//1. create states for each input fiels
-//2. in our useEffect get the project that has the id in our params
-//3. set each state to the data we got from the axios call
-//4. in our handleSubmit send a put request with the states in the body
 
 function EditProduct() {
     const [title,setTitle] = useState('')

@@ -6,13 +6,17 @@ import productsService from "../services/ProductsService";
 import ProductDetailsPage from "./ProductDetailsPage";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import Search from "../components/Search";
 
 function ProductsList() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts2, setFiltered2Products] = useState([]);
+  // const [filteredSearchProducts, setFilteredSearchedProducts] = useState(filteredProducts);
   const path = useLocation();
   const idOwner = console.log(path);
+
   function getProducts() {
     //fetch the data for all projects when the component first loads
 
@@ -27,23 +31,27 @@ function ProductsList() {
         console.log(response.data);
         setProducts(response.data);
 
-        console.log("*********");
-        console.log(user);
-        console.log("*********");
-
-        const filtered = response.data.filter(
-          (oneProduct) => oneProduct.idOwner === user._id
-        );
-        setFilteredProducts(filtered);
+        if (user.userPermission !== "user") {
+          const filtered = response.data.filter(
+            (oneProduct) => oneProduct.idOwner === user._id
+          );
+          setFilteredProducts(filtered);
+        } else {
+          setFilteredProducts(response.data);
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.error("Error fetching products:", error);
       });
   }
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    setFiltered2Products(filteredProducts);
+  }, [filteredProducts]);
 
   function deleteProduct(id) {
     axios
@@ -55,10 +63,18 @@ function ProductsList() {
         console.log(err);
       });
   }
+  function handleSearch(query) {
+    const searchResult = filteredProducts.filter((products) =>
+      products.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setFiltered2Products(searchResult);
+  }
 
   return (
     <div className="ProductsListPage">
-      {filteredProducts.map((oneProduct) => {
+      <Search searchHandler={handleSearch}></Search>
+      {filteredProducts2.map((oneProduct) => {
         return (
           <div className="ProductCard card" key={oneProduct._id}>
             <Link to={`/productdetailspage/${oneProduct._id}`}>
@@ -68,13 +84,19 @@ function ProductsList() {
               <h3>{oneProduct.stock}</h3>
               <h3>{oneProduct.imageProduct}</h3>
             </Link>
-            <button
-              onClick={() => {
-                deleteProduct(oneProduct._id);
-              }}
-            >
-              Delete
-            </button>
+
+            {user.userPermission !== "user" && (
+              <button
+                onClick={() => {
+                  deleteProduct(oneProduct._id);
+                }}
+              >
+                Delete
+              </button>
+            )}
+            {user.userPermission === "user" && (
+              <button onClick={() => {}}>Add to basket</button>
+            )}
           </div>
         );
       })}
