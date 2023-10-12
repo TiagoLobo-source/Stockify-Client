@@ -63,7 +63,7 @@ function Navbar() {
           <Link to="/">
             <button>Seller details</button>
           </Link>
-          <Link to="/">
+          <Link to="/sellerproducts">
             <button>Seller products</button>
           </Link>
         </>

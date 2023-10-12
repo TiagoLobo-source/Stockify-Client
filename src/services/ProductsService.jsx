@@ -38,6 +38,16 @@ class ProductsService {
   updateProduct = (id, requestBody) => {
     return this.api.put(`/api/products/${id}`, requestBody);
   };
+
+    // PUT /api/products/:id
+    approveProduct = (id, isApproved, isPassed) => {
+      return this.api.put(`/api/productsapproval/${id}`, isApproved, isPassed);
+    };
+
+    // PUT /api/products/:id
+    refuseProduct = (id, isApproved, isPassed, reasonForRefusal) => {
+      return this.api.put(`/api/productsrefusal/${id}`, isApproved, isPassed, reasonForRefusal);
+    };
  
   // DELETE /api/products/:id
   deleteProduct = id => {

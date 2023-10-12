@@ -33,11 +33,13 @@ function ProductsList() {
 
         if (user.userPermission !== "user") {
           const filtered = response.data.filter(
-            (oneProduct) => oneProduct.idOwner === user._id
+            (oneProduct) =>( oneProduct.idOwner === user._id)
           );
           setFilteredProducts(filtered);
-        } else {
-          setFilteredProducts(response.data);
+        } else {const filtered = response.data.filter(
+          (oneProduct) =>( oneProduct.isApproved && user.userPermission === "user")
+        );
+          setFilteredProducts(filtered);
         }
       })
       .catch((error) => {
@@ -83,6 +85,8 @@ function ProductsList() {
               <h3>{oneProduct.price}</h3>
               <h3>{oneProduct.stock}</h3>
               <h3>{oneProduct.imageProduct}</h3>
+              <h3>{oneProduct.isPassed}</h3>
+
             </Link>
 
             {user.userPermission !== "user" && (
