@@ -43,7 +43,7 @@ function AddProducts(props) {
       .then(() => {
         // alert("Product successfully Created");
         // props.getProducts();
-        console.log(props);
+   
         setTitle("");
         setDescription("");
         setStock(0);
@@ -56,9 +56,7 @@ function AddProducts(props) {
       });
   }
   //console.log(props);
-  console.log("1dsadsasdasdasdasdasdsa");
-  console.log(user._id);
-  console.log("1dsadsasdasdasdasdasdsa");
+
   return (
     <div className="AddProduct">
       <h3>Add Product</h3>

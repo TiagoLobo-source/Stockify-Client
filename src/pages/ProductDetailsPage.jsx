@@ -10,7 +10,7 @@ import productsService from '../services/ProductsService'
 function ProductDetailsPage() {
     const [product,setProduct] = useState(null)
     const {id} = useParams()
-    console.log(id)
+   
     const navigate = useNavigate()
 
     /*function deleteProduct(){
@@ -26,9 +26,7 @@ function ProductDetailsPage() {
     useEffect(()=>{
         productsService.getProduct(id)
         .then((response)=>{
-            console.log("fdskfkdskflkds")
-            console.log(response.data)
-            console.log("fdskfkdskflkds")
+            
             setProduct(response.data)
         })
         .catch((err)=>{

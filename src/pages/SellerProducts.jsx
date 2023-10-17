@@ -15,7 +15,7 @@ function SellerProducts() {
   const [filteredProducts2, setFiltered2Products] = useState([]);
   // const [filteredSearchProducts, setFilteredSearchedProducts] = useState(filteredProducts);
   const path = useLocation();
-  const idOwner = console.log(path);
+
 
   const [isChecked, setIsChecked] = useState(false);
   function getProducts() {
@@ -29,7 +29,7 @@ function SellerProducts() {
     productsService
       .getAllProducts()
       .then((response) => {
-        console.log(response.data);
+       
         setProducts(response.data);
 
         if (user.userPermission === "admin" && isChecked) {

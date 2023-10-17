@@ -29,7 +29,7 @@ function EditProduct() {
     useEffect(()=>{
         productsService.getProduct(id)
         .then(response=>{
-            console.log(response.data)
+           
             setTitle(response.data.title)
             setDescription(response.data.description)
             setPassed(response.data.isPassed)

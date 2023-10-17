@@ -11,7 +11,7 @@ function LoginPage(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
-  console.log(AuthContext);
+
   const { authenticateUser } = useContext(AuthContext);
 
   const handleEmail = (e) => setEmail(e.target.value);
@@ -25,7 +25,7 @@ function LoginPage(props) {
     axios
       .post(`${API_URL}/auth/login`, userInfo)
       .then((response) => {
-        console.log(response.data);
+       
         localStorage.setItem("authToken", response.data.authToken);
         authenticateUser();
       })

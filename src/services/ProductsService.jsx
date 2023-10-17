@@ -53,6 +53,11 @@ class ProductsService {
   deleteProduct = id => {
     return this.api.delete(`/api/products/${id}`);
   };
+
+   // PUT api/cart/:id
+   updatedStockCart = (id, requestBody) => {
+    return this.api.put(`/api/cart/${id}`, requestBody);
+  };
 }
  
 // Create one instance object
