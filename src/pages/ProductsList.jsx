@@ -35,7 +35,7 @@ function ProductsList() {
        
         setProducts(response.data);
 
-        if ( isLoggedIn && user.userPermission !== "user") {
+        if ( isLoggedIn && user.userPermission !== "user" ) {
           const filtered = response.data.filter(
             (oneProduct) => oneProduct.idOwner === user._id
           );
@@ -125,7 +125,7 @@ function ProductsList() {
                 Delete
               </button>
             )}
-            {user.userPermission === "user" && (
+            {(user.userPermission === "user" || !isLoggedIn) && (
               <button
                 className="addToCartBttn"
                 onClick={() => addCart(oneProduct._id, oneProduct)}

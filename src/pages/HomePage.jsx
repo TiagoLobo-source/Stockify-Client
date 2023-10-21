@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import styled from 'styled-components';
+import ProductsList from "../pages/ProductsList";
 
 const Container = styled.div`
   display: flex;
@@ -49,10 +50,13 @@ function HomePage() {
             )}
           </nav>
         )}
+        
       </Header>
+      <ProductsList>
       <Content>
         {/* Your main content goes here */}
       </Content>
+      </ProductsList>
       <Footer>
         &copy; {new Date().getFullYear()} My Website
       </Footer>

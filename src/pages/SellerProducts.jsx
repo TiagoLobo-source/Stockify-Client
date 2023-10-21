@@ -16,7 +16,6 @@ function SellerProducts() {
   // const [filteredSearchProducts, setFilteredSearchedProducts] = useState(filteredProducts);
   const path = useLocation();
 
-
   const [isChecked, setIsChecked] = useState(false);
   function getProducts() {
     //fetch the data for all projects when the component first loads
@@ -29,7 +28,6 @@ function SellerProducts() {
     productsService
       .getAllProducts()
       .then((response) => {
-       
         setProducts(response.data);
 
         if (user.userPermission === "admin" && isChecked) {
@@ -145,22 +143,27 @@ function SellerProducts() {
                   {user.userPermission !== "user" && (
                     <td>
                       {!oneProduct.isApproved ? (
-                        <div><button
-                          onClick={() => {
-                            approveProduct(oneProduct._id);
-                          }}
-                        >
-                          Approve
-                        </button>
-                        <button
-                        onClick={() => {
-                          refuseProduct(oneProduct._id);
-                        }}
-                      >
-                        Reject
-                      </button>
-                     
-                      </div>
+                        <div>
+                          <button
+                            onClick={() => {
+                              approveProduct(oneProduct._id);
+                            }}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            style={{
+                              width:"43%",
+                              background:
+                                oneProduct.isPassed === "refused" ? "red" : "",
+                            }}
+                            onClick={() => {
+                              refuseProduct(oneProduct._id);
+                            }}
+                          >
+                            {oneProduct.isPassed === "refused" ? "Rejected" : "Reject"}
+                          </button>
+                        </div>
                       ) : (
                         <span>Already Approved</span>
                       )}

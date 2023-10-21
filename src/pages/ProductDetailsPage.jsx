@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import productsService from '../services/ProductsService'
-
+import { AuthContext } from "../context/auth.context";
+import { useContext } from "react";
 /* 
 1. Fetching the data for 1 project
 2. display the data for the user */
@@ -10,7 +11,7 @@ import productsService from '../services/ProductsService'
 function ProductDetailsPage() {
     const [product,setProduct] = useState(null)
     const {id} = useParams()
-   
+    const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
     const navigate = useNavigate()
 
     /*function deleteProduct(){
@@ -48,17 +49,17 @@ function ProductDetailsPage() {
             </>
         )}
 
-   
         <Link to={"/products"}>
             <button>Go back to Product</button>
         </Link>
 
 
-        <Link to={`/editproduct/${id}/edit`}>
-        <button>Edit Product</button>
-        </Link>
-
-     
+        {user.userPermission !== "user" && (
+                <Link to={`/editproduct/${id}/edit`}>
+                <button>Edit Product</button>
+                </Link>
+            )}
+          
     </div>
   )
 }

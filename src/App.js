@@ -12,6 +12,8 @@ import EditProduct from "./pages/EditProduct";
 import SellerProducts from "./pages/SellerProducts";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./context/shop.context";
+import PersonalDetails from "./pages/PersonalDetails";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   return (
@@ -19,18 +21,17 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage></HomePage>} />
+          <Route path="/" element={<HomePage><ProductsList /></HomePage>} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/addproducts" element={<AddProduct />} />
           <Route path="/products" element={<ProductsList />} />
-          <Route
-            path="/productdetailspage/:id"
-            element={<ProductDetailsPage />}
-          />
+          <Route path="/productdetailspage/:id" element={<ProductDetailsPage />}/>
           <Route path="/editproduct/:id/edit" element={<EditProduct />} />
           <Route path="/sellerproducts" element={<SellerProducts />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/personaldetails/:id" element={<PersonalDetails/>} />
+          <Route path="/orders" element={<OrdersPage/>} />
         </Routes>
       </div>
     </CartProvider>
