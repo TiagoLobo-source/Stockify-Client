@@ -54,7 +54,7 @@ function HomePage() {
       </Header>
       <ProductsList>
       <Content>
-        {/* Your main content goes here */}
+        
       </Content>
       </ProductsList>
       <Footer>

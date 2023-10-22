@@ -7,7 +7,7 @@ import ProductDetailsPage from "./ProductDetailsPage";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import Search from "../components/Search";
-import { useCart } from '../context/shop.context';
+import { useCart } from "../context/shop.context";
 
 function ProductsList() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -15,35 +15,27 @@ function ProductsList() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filteredProducts2, setFiltered2Products] = useState([]);
 
-  const {cart, addToCart } = useCart();
+  const { cart, addToCart } = useCart();
 
   // const [filteredSearchProducts, setFilteredSearchedProducts] = useState(filteredProducts);
   const path = useLocation();
 
-
   function getProducts() {
     //fetch the data for all projects when the component first loads
 
-    /*axios.get("http://localhost:5005/api/products", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      })*/
     productsService
       .getAllProducts()
       .then((response) => {
-       
         setProducts(response.data);
 
-        if ( isLoggedIn && user.userPermission !== "user" ) {
+        if (isLoggedIn && user.userPermission !== "user") {
           const filtered = response.data.filter(
             (oneProduct) => oneProduct.idOwner === user._id
           );
           setFilteredProducts(filtered);
         } else {
           const filtered = response.data.filter(
-            (oneProduct) =>
-              oneProduct.isApproved
+            (oneProduct) => oneProduct.isApproved
           );
           setFilteredProducts(filtered);
         }
@@ -79,34 +71,18 @@ function ProductsList() {
     setFiltered2Products(searchResult);
   }
 
- /* function addCart(id, product) {
-    productsService
-      .updatedStockCart(id)
-
-      .then(() => {
-        setCart([...cart, product]);
-        console.log("*************")
-        console.log(cart)
-        console.log("*************")
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }*/
-
   function addCart(id, product) {
     console.log("ID:", id);
-    
+
     addToCart(product);
   }
 
   return (
     <div className="ProductsListPage">
       <Search searchHandler={handleSearch}></Search>
-      {filteredProducts2.map((oneProduct) => { 
+      {filteredProducts2.map((oneProduct) => {
         return (
           <div className="ProductCard card" key={oneProduct._id}>
-          
             <Link to={`/productdetailspage/${oneProduct._id}`}>
               <h3>{oneProduct.title}</h3>
               <h3>{oneProduct.description}</h3>
@@ -116,7 +92,7 @@ function ProductsList() {
               <h3>{oneProduct.isPassed}</h3>
             </Link>
 
-            {user.userPermission !== "user" && (
+            {user?.userPermission !== "user" && isLoggedIn &&(
               <button
                 onClick={() => {
                   deleteProduct(oneProduct._id);
@@ -125,7 +101,7 @@ function ProductsList() {
                 Delete
               </button>
             )}
-            {(user.userPermission === "user" || !isLoggedIn) && (
+            {(user?.userPermission === "user" || !isLoggedIn) && (
               <button
                 className="addToCartBttn"
                 onClick={() => addCart(oneProduct._id, oneProduct)}

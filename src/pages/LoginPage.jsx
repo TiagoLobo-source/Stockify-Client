@@ -25,9 +25,10 @@ function LoginPage(props) {
     axios
       .post(`${API_URL}/auth/login`, userInfo)
       .then((response) => {
-       
         localStorage.setItem("authToken", response.data.authToken);
         authenticateUser();
+        // Redirect to the "/" page after successful login
+        navigate("/");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

@@ -68,7 +68,7 @@ function AuthProviderWrapper(props) {
     authenticateUser()
   },[])
  
-
+ 
   return (                                                   
     <AuthContext.Provider 
       value={{ 

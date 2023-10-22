@@ -153,7 +153,7 @@ function SellerProducts() {
                           </button>
                           <button
                             style={{
-                              width:"43%",
+                              width: "43%",
                               background:
                                 oneProduct.isPassed === "refused" ? "red" : "",
                             }}
@@ -161,7 +161,9 @@ function SellerProducts() {
                               refuseProduct(oneProduct._id);
                             }}
                           >
-                            {oneProduct.isPassed === "refused" ? "Rejected" : "Reject"}
+                            {oneProduct.isPassed === "refused"
+                              ? "Rejected"
+                              : "Reject"}
                           </button>
                         </div>
                       ) : (
