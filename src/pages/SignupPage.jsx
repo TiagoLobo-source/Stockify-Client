@@ -35,8 +35,9 @@ function SignupPage(props) {
 
     const newUser = { email, password, name, userPermission };
 
-    axios
-      .post(`${API_URL}/auth/signup`, newUser)
+   axios
+     .post(`${API_URL}/auth/signup`, newUser)
+     
       .then(() => {
         navigate("/");
       })
