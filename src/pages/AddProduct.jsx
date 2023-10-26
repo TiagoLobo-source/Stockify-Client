@@ -18,10 +18,30 @@ function AddProducts(props) {
   const categories = ["Electronics", "Clothing", "Furniture", "Books", "Other"];
   const { user } = useContext(AuthContext);
 
-  const navigate = useNavigate();
+ 
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
+  };
+
+  const navigate = useNavigate();
+
+    const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+ 
+    const uploadData = new FormData();
+ 
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+ 
+     axios.post('http://localhost:5005/api/upload', uploadData)
+      .then(response => {
+         console.log("response is: ", response.data.fileUrl);
+        // response carries "fileUrl" which we can use to update the state
+        setImageProduct(response.data.fileUrl);
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
   };
 
   function handleSubmit(e) {
@@ -57,6 +77,7 @@ function AddProducts(props) {
   }
   //console.log(props);
 
+  
   return (
     <div className="AddProduct">
       <h3>Add Product</h3>
@@ -108,10 +129,8 @@ function AddProducts(props) {
           Image Product
           <input
             type="file"
-            value={imageProduct}
-            onChange={(e) => {
-              setImageProduct(e.target.value);
-            }}
+            onChange={(e)=>{handleFileUpload(e)}}
+            
           />
         </label>
 

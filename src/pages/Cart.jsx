@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "../pages/Cart.css";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005'
 
 function Cart() {
   const { cart, removeFromCart, addToCart } = useCart();
