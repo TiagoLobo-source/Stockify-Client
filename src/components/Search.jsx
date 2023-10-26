@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
 function Search(props) {
-  const [query, setQuery] = useState('');
+ // const [query, setQuery] = useState('');
 
   return (
-    <div className='mt-4'>
+    <div style={{ backgroundColor: "#F7ECE7", padding: "40px" }}>
       <label htmlFor="">Search</label>
 
       <input
-        value={query}
+        value={props.query}
         type="text"
         placeholder="Enter Search Query"
         onChange={(e) => {
-          props.searchHandler(e.target.value);
-          setQuery(e.target.value);
+          //props.searchHandler(e.target.value);
+          props.setQuery(e.target.value);
         }}
       />
     </div>

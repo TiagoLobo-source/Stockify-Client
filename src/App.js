@@ -14,6 +14,8 @@ import Cart from "./pages/Cart";
 import { CartProvider } from "./context/shop.context";
 import PersonalDetails from "./pages/PersonalDetails";
 import OrdersPage from "./pages/OrdersPage";
+import Main from "./pages/App";
+import ProductsHome from "./pages/ProductListHome"
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/personaldetails/:id" element={<PersonalDetails/>} />
           <Route path="/orders" element={<OrdersPage/>} />
+          <Route path="/app" element={<Main/>} />
+          <Route path="/productshome" element={<ProductsHome/>} />
         </Routes>
       </div>
     </CartProvider>

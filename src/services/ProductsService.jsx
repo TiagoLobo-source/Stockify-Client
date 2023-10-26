@@ -58,7 +58,17 @@ class ProductsService {
    updatedStockCart = (id, requestBody) => {
     return this.api.put(`/api/cart/${id}`, requestBody);
   };
+
+  getAllProductsHome = () => {
+    return this.api.get('/api/productshome');
+  };
+  
+  deleteOrder = id => {
+    return this.api.delete(`/api/orders/${id}`);
+  };
 }
+
+
  
 // Create one instance object
 const productsService = new ProductsService();

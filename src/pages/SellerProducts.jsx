@@ -97,7 +97,7 @@ function SellerProducts() {
 
   return (
     <div className="SellerProductsPage">
-      <Search searchHandler={handleSearch}></Search>
+    
       <label>
         <input
           type="checkbox"

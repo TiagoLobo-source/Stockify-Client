@@ -1,0 +1,37 @@
+.ProductsListPage{
+  height: 100vh;
+}
+
+
+
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: flex-start;
+  }
+  
+  .product-card {
+    flex-basis: calc(25% - 20px);
+    padding: 20px; 
+    border: none;
+    background-color: #f8d8c9; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s ease-in-out;
+    margin: 10px ;
+    
+  }
+  .product-card:hover {
+    transform: scale(1.02); 
+  }
+  
+  @media (max-width: 768px) {
+    .product-card {
+      flex-basis: calc(49% - 20px);
+    }
+  }
+  .ProductsListPage {
+    background-color: #F7ECE7;
+  }
+
+  

@@ -1,0 +1,86 @@
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out, display 0.3s;
+  }
+  
+  .success-message.show {
+    display: block;
+    transform: translateY(0);
+  }
+  
+
+ 
+  
+  .orders-card {
+    flex-basis: calc(25% - 20px);
+    padding: 20px;
+    border: none;
+    background-color: #f8d8c9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    margin: 10px;
+  }
+
+  .order-cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .order-cards {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: none;
+    border-radius: 5px;
+    position: relative;
+  }
+  
+  .order-cards.show {
+    display: block;
+  }
+  
+  .close-button {
+   
+        position: absolute; 
+        top: -20px; 
+        right: -10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+      
+  }
+  
+  .action-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .checkout-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }

@@ -1,0 +1,67 @@
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+    color: #181412;
+    font-family: "Montserrat";
+  }
+  
+  .navbar {
+    background-color: #F7ECE7;
+    color:#181412;
+  }
+
+  .hero{
+    background-color: #F7ECE7;
+
+  }
+
+  .hero-section{
+    height:80vh;
+    background-color: #F7ECE7;
+  }
+  /* HERO */
+  @media (min-width: 992px) {
+    .rounded-lg-3 { border-radius: .3rem; }
+  }
+
+ /* FONT */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap');
+
+
+  /*FEATURES*/
+  .feature-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: .75rem;
+  }
+  
+  .icon-square {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .75rem;
+  }
+  
+  .text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
+  .text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
+  .text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
+  
+  .card-cover {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  
+  .feature-icon-small {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  button{
+    font-size:12px;
+    font-weight:600;
+  }
+  
+  .kHnpvA {
+    flex-grow: 1;
+    padding: 0px;
+}

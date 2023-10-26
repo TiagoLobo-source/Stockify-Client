@@ -50,9 +50,9 @@ body {
     border: none;
     cursor: pointer;
     color: white;
-    font-size: 18px;
+    font-size: 14px;
     margin: 0 10px;
-    padding: 10px 20px; 
+    padding: 10px 10px; 
     background-color: rgba(0, 0, 0, 0.5); 
     border-radius: 4px; 
     transition: background-color 0.3s; 
@@ -60,6 +60,12 @@ body {
 button:hover {
     background-color: rgba(0, 0, 0, 0.8); 
 }
+
+.navbar button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-weight: bold; }
+  .navbar button{
+    outline: none;  }
 
   .user-info {
     margin-right: 20px;
@@ -78,3 +84,19 @@ button:hover {
     margin-left: 6px;
   }
   
+
+  @media (max-width: 768px) {
+    .navbar {
+      height: 60px; 
+      padding: 0 10px; 
+    }
+  
+    .links a {
+      font-size: 16px; 
+    }
+  
+    button {
+      font-size: 16px;
+      padding: 8px 16px; 
+    }
+  }

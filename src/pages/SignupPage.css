@@ -1,0 +1,110 @@
+/* SignupPage.css */
+.SignupPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #181412;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #181412;
+}
+
+.name,
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.card h1 {
+  margin: 0 0 10px 0;
+}
+.radio-group {
+  margin: 5px 0;
+}
+.radio-group p {
+  margin: 5px 0;
+}
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin: 0px 0;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+.error-box {
+  margin-top: 20px;
+  background-color: #ffcccc;
+  border: 1px solid #f00;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: #f00;
+  font-weight: bold;
+}
+
+.element {
+  overflow: hidden;
+}
+body {
+  min-height: 100vh;
+}
+
+.radio-options-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-option {
+  margin-right: 10px;
+}
+
+.button-signup {
+  width: 100%;
+  margin: 0;
+}
+
+.Container {
+  max-width: 100%;
+ 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: linear-gradient(to right, #cfbcb3 50%, #ffffff 50%);
+  min-height: 100vh;
+}
+
+.card {
+  position: relative;
+  width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: 30%;
+ 
+}

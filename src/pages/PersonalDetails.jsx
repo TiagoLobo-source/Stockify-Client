@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import "./PersonalDetails.css"; 
 
 const API_URL = "http://localhost:5005";
 
@@ -53,7 +54,8 @@ function PersonalDetails() {
   }
 
   return (
-    <div>
+  
+    <div className="container">
       <h2>Personal Details</h2>
       {isEditing ? (
         <form>
@@ -147,7 +149,7 @@ function PersonalDetails() {
           </button>
         </form>
       ) : (
-        <div>
+        <div className="content">
           <p>Name: {userData.name}</p>
           <p>Mobile Phone: {userData.mobilePhone}</p>
           <p>
@@ -165,7 +167,9 @@ function PersonalDetails() {
           <p>Region: {userData.region}</p>
           <p>Country: {userData.country}</p>
           {/* Renderize outros campos de dados */}
-          <button onClick={handleEditClick}>Editar</button>
+          <button className="edit-button" onClick={handleEditClick}>
+            Edit
+          </button>
         </div>
       )}
     </div>

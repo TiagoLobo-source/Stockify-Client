@@ -1,14 +1,18 @@
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import { useCart } from "../context/shop.context";
 import "./Navbar.css";
 
 function Navbar() {
+  const [searchQuery, setSearchQuery] = useState("");
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const { cart } = useCart();
-
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
   const buttonStyle = {
     color: "#181412",
@@ -16,7 +20,14 @@ function Navbar() {
     backgroundColor: "transparent",
     border: "none",
   };
+  const centeredStyle = {
+    display: "flex",
+    alignItems: "center",
+  };
 
+  const boldText = {
+    fontWeight: "bold",
+  };
   return (
     <nav
       className="navbar navbar-expand-md navbar-dark fixed-top"
@@ -26,7 +37,7 @@ function Navbar() {
         <a
           className="navbar-brand"
           style={{ color: "#181412", fontWeight: 700 }}
-          href="#"
+          href="/"
         >
           Stockify
         </a>
@@ -42,122 +53,102 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-         
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-3"
-              type="search"
-              placeholder="Search for a product"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-dark" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
+          <ul className="navbar-nav me-auto mb-2 mb-md-0">
+            {isLoggedIn && (
+              <>
+                {user.userPermission === "user" && (
+                  <>
+                    <Link to="/products" className="nav-link">
+                      <button style={buttonStyle}>Products</button>
+                    </Link>
+                    <Link to="/orders" className="nav-link">
+                      <button style={buttonStyle}>My orders</button>
+                    </Link>
+                    <Link
+                      to={`/personaldetails/${user._id}`}
+                      className="nav-link"
+                    >
+                      <button style={buttonStyle}>Personal details</button>
+                    </Link>
+                  </>
+                )}
+                {(user.userPermission === "supplier" ||
+                  user.userPermission === "admin") && (
+                    <>
+                      <Link to="/products" className="nav-link">
+                        <button style={buttonStyle}>Products</button>
+                      </Link>
 
-      {isLoggedIn && (
-        <>
-          <div className="user-info">
-            <p>{user.name}</p>
-            <p>{user.userPermission}</p>
-          </div>
-
-          <button
-            onClick={logOutUser}
-            className="nav-link"
-            style={buttonStyle}
-          >
-            Logout
-          </button>
-
-          {user.userPermission === "user" && (
-            <>
-              <Link to="/products" className="nav-link">
-                <button
-                 style={buttonStyle}
-                >
-                  Products
-                </button>
-              </Link>
-              <Link to="/orders" className="nav-link">
-                <button
-                  style={buttonStyle}
-                >
-                  My orders
-                </button>
-              </Link>
-              <Link to={`/personaldetails/${user._id}`} className="nav-link">
-                <button
-                 style={buttonStyle}
-                >
-                  Personal details
-                </button>
-              </Link>
-              <Link to="/cart" className="nav-link">
-                <button
-                  style={buttonStyle}
-                >
-                  <ShoppingCart size={32} />
-                  {cartItemCount > 0 && (
-                    <span className="cart-count">{cartItemCount}</span>
+                      <Link to="/orders" className="nav-link">
+                        <button style={buttonStyle}>Orders tracking</button>
+                      </Link>
+                      <Link
+                        to={`/personaldetails/${user._id}`}
+                        className="nav-link"
+                      >
+                        <button style={buttonStyle}>Company details</button>
+                      </Link>
+                    </>
                   )}
+                {user.userPermission === "admin" && (
+                  <>
+                    <Link to="/sellerproducts" className="nav-link">
+                      <button style={buttonStyle}>Posts management</button>
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
+          </ul>
+        </div>
+        <div className="ms-auto d-flex align-items-center">
+          {!isLoggedIn && (
+            <>
+              <Link to="/signup" className="nav-link">
+                <button className="realbutton" style={buttonStyle}>
+                  Sign Up
                 </button>
               </Link>
-            </>
-          )}
-          {user.userPermission === "supplier" && (
-            <>
-              <Link to="/" className="nav-link">
+              <Link to="/login" className="nav-link">
+                <button className="realbutton" style={buttonStyle}>
+                  Login
+                </button>
+              </Link>
+              <Link to="/productshome" className="nav-link">
                 <button style={buttonStyle}>Products</button>
               </Link>
-              <Link to="/" className="nav-link">
-                <button style={buttonStyle}>My sales</button>
-              </Link>
-              <Link to="/orders" className="nav-link">
-                <button style={buttonStyle}>Orders tracking</button>
-              </Link>
-              <Link to={`/personaldetails/${user._id}`} className="nav-link">
-                <button style={buttonStyle}>Company details</button>
-              </Link>
             </>
           )}
-          {user.userPermission === "admin" && (
+
+          {isLoggedIn && (
             <>
-              <Link to="/" className="nav-link">
-                <button style={buttonStyle}>Add category</button>
-              </Link>
-
-              <Link to={`/personaldetails/${user._id}`} className="nav-link">
-                <button style={buttonStyle}>Seller details</button>
-              </Link>
-              <Link to="/sellerproducts" className="nav-link">
-                <button style={buttonStyle}>Seller products</button>
-              </Link>
+              <button
+                onClick={logOutUser}
+                className="nav-link"
+                style={buttonStyle}
+              >
+                Logout
+              </button>
+              <button
+                className="nav-link"
+                style={{ fontWeight: "bold", ...buttonStyle }}
+              >
+                {user.name.split(" ")[0]}
+              </button>
             </>
           )}
-        </>
-      )}
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            <button className="realbutton" style={buttonStyle}>Sign Up</button>
-          </Link>
-          <Link to="/login">
-            <button className="realbutton" style={buttonStyle}>Login</button>
-          </Link>
-          <Link to="/cart">
-            <button className="realbutton" style={buttonStyle}>
-              <ShoppingCart size={32} />
-              {cartItemCount > 0 && (
-                <span className="cart-count">{cartItemCount}</span>
-              )}
-            </button>
-          </Link>
-        </>
-      )}
+          {(!isLoggedIn || user.userPermission === "user") && (
+            <Link to="/cart" className="nav-link">
+              <button className="realbutton" style={buttonStyle}>
+                <ShoppingCart size={32} />
+                {cartItemCount > 0 && (
+                  <span className="cart-count">{cartItemCount}</span>
+                )}
+              </button>
+            </Link>
+          )}
+        </div>
+      </div>
     </nav>
   );
 }

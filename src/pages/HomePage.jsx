@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import styled from 'styled-components';
+import styled from "styled-components";
 import ProductsList from "../pages/ProductsList";
+import App from "../pages/App";
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  background-color: #333;
+  background-color: #F7ECE7;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -19,7 +20,6 @@ const Header = styled.header`
 
 const Content = styled.main`
   flex-grow: 1;
-  padding: 20px;
 `;
 
 const Footer = styled.footer`
@@ -30,36 +30,16 @@ const Footer = styled.footer`
 `;
 
 function HomePage() {
-  const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
+  
 
   return (
     <Container>
-      <Header>
-        <h1>Welcome to My Website</h1>
-        {isLoggedIn && (
-          <nav>
-            {(user.userPermission === "supplier" || user.userPermission === "admin") && (
-              <>
-                <Link to="/addproducts">
-                  <button>Add Products</button>
-                </Link>
-                <Link to="/products">
-                  <button>Product List</button>
-                </Link>
-              </>
-            )}
-          </nav>
-        )}
-        
-      </Header>
-      <ProductsList>
+     
       <Content>
-        
+        <App></App>
       </Content>
-      </ProductsList>
-      <Footer>
-        &copy; {new Date().getFullYear()} My Website
-      </Footer>
+
+      <Footer>&copy; {new Date().getFullYear()} My Website</Footer>
     </Container>
   );
 }

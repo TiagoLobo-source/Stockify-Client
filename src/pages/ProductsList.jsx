@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import AddProduct from "./AddProduct";
 import productsService from "../services/ProductsService";
 import ProductDetailsPage from "./ProductDetailsPage";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import Search from "../components/Search";
 import { useCart } from "../context/shop.context";
+import "../pages/ProductsList.css";
 
 function ProductsList() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filteredProducts2, setFiltered2Products] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const { cart, addToCart } = useCart();
-
-  // const [filteredSearchProducts, setFilteredSearchedProducts] = useState(filteredProducts);
   const path = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [query, setQuery] = useState("");
 
   function getProducts() {
-    //fetch the data for all projects when the component first loads
-
     productsService
       .getAllProducts()
       .then((response) => {
@@ -50,8 +48,15 @@ function ProductsList() {
   }, [user]);
 
   useEffect(() => {
-    setFiltered2Products(filteredProducts);
-  }, [filteredProducts]);
+    if (searchQuery) {
+      const searchResult = filteredProducts.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFiltered2Products(searchResult);
+    } else {
+      setFiltered2Products(filteredProducts);
+    }
+  }, [searchQuery, filteredProducts]);
 
   function deleteProduct(id) {
     axios
@@ -63,26 +68,68 @@ function ProductsList() {
         console.log(err);
       });
   }
-  function handleSearch(query) {
-    const searchResult = filteredProducts.filter((products) =>
-      products.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    setFiltered2Products(searchResult);
-  }
 
   function addCart(id, product) {
-    console.log("ID:", id);
-
     addToCart(product);
+  }
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    setSearchQuery(query);
+  }
+
+  
+
+  function filterProductsByCategory() {
+    if (selectedCategory === "") {
+      return filteredProducts2;
+    }
+    return filteredProducts2.filter((product) => product.category === selectedCategory);
   }
 
   return (
     <div className="ProductsListPage">
-      <Search searchHandler={handleSearch}></Search>
-      {filteredProducts2.map((oneProduct) => {
-        return (
-          <div className="ProductCard card" key={oneProduct._id}>
+       {isLoggedIn && (
+          <nav>
+            {(user.userPermission === "supplier" ||
+              user.userPermission === "admin") && (
+              <>
+                <Link to="/addproducts">
+                  <button>Add Products</button>
+                </Link>
+                
+              </>
+            )}
+          </nav>
+        )}
+      <form className="d-flex" role="search" onSubmit={handleSearchSubmit}>
+        <input
+          className="form-control me-3"
+          type="search"
+          placeholder="Search for a product"
+          aria-label="Search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="btn btn-outline-dark" type="submit">
+          Search
+        </button>
+      </form>
+      
+      <select
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        value={selectedCategory}
+      >
+        <option value="">All</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Books">Books</option>
+        <option value="Other">Other</option>
+      </select>
+      <div className="product-cards">
+        {filterProductsByCategory().map((oneProduct) => (
+          <div className="product-card" key={oneProduct._id}>
             <Link to={`/productdetailspage/${oneProduct._id}`}>
               <h3>{oneProduct.title}</h3>
               <h3>{oneProduct.description}</h3>
@@ -92,7 +139,7 @@ function ProductsList() {
               <h3>{oneProduct.isPassed}</h3>
             </Link>
 
-            {user?.userPermission !== "user" && isLoggedIn &&(
+            {user?.userPermission !== "user" && isLoggedIn && (
               <button
                 onClick={() => {
                   deleteProduct(oneProduct._id);
@@ -110,10 +157,21 @@ function ProductsList() {
               </button>
             )}
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
+ 
+
+
+  function filterProductsByCategory() {
+    if (selectedCategory === "") {
+      
+      return filteredProducts2;
+    }
+   
+    return filteredProducts2.filter((product) => product.category === selectedCategory);
+  }
 }
 
 export default ProductsList;
