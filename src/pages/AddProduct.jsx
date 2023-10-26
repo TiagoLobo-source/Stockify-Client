@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import productsService from "../services/ProductsService";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
-
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+ 
 function AddProducts(props) {
   const [title, setTitle] = useState("");
   const [stock, setStock] = useState(0);
@@ -35,7 +36,7 @@ function AddProducts(props) {
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("imageUrl", e.target.files[0]);
  
-     axios.post('http://localhost:5005/api/upload', uploadData)
+     axios.post(`${API_URL}/api/upload`, uploadData)
       .then(response => {
          console.log("response is: ", response.data.fileUrl);
         // response carries "fileUrl" which we can use to update the state
