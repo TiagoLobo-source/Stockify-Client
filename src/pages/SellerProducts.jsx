@@ -7,6 +7,8 @@ import { useContext } from "react";
 import Search from "../components/Search";
 import "./SellerProducts.css";
 
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+
 function SellerProducts() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
@@ -56,7 +58,7 @@ function SellerProducts() {
 
   function approveProduct(id) {
     axios
-      .put(`http://localhost:5005/api/productsapproval/${id}`)
+      .put(`${API_URL}/api/productsapproval/${id}`)
       .then(() => {
         getProducts();
       })
@@ -67,7 +69,7 @@ function SellerProducts() {
 
   function refuseProduct(id) {
     axios
-      .put(`http://localhost:5005/api/productsrefusal/${id}`)
+      .put(`${API_URL}/api/productsrefusal/${id}`)
       .then(() => {
         getProducts();
       })

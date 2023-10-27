@@ -39,7 +39,7 @@ function EditProduct() {
 
 
     function deleteProduct() {
-        axios.delete(`http://localhost:5005/api/products/${id}`)
+        axios.delete(`${API_URL}/api/products/${id}`)
             .then(response => {
                 navigate('/products')
             })
@@ -66,7 +66,7 @@ function EditProduct() {
     function handleSubmit(e) {
         e.preventDefault()
         productsService.updateProduct(id, { title, description, isPassed, isApproved, stock, price, imageProduct })
-            // axios.put(`http://localhost:5005/api/products/${id}`,{title,description})
+            // axios.put(`${API_URL}/api/products/${id}`,{title,description})
             .then(() => {
                 console.log('Product updated successfully'); 
                 setSuccessMessage('Product updated successfully.');

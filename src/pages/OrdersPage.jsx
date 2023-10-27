@@ -4,6 +4,9 @@ import Modal from "react-modal";
 import { AuthContext } from "../context/auth.context";
 import productsService from "../services/ProductsService";
 
+
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+
 Modal.setAppElement("#root");
 
 function OrderPage() {
@@ -35,7 +38,7 @@ function OrderPage() {
       .then(() => {
         if (user.userPermission === "user") {
           axios
-            .get(`http://localhost:5005/api/orders/user/${user._id}`)
+            .get(`${API_URL}/api/orders/user/${user._id}`)
             .then((response) => {
               setUserOrders(response.data);
             })
@@ -52,7 +55,7 @@ function OrderPage() {
   useEffect(() => {
     if (user.userPermission === "user") {
       axios
-        .get(`http://localhost:5005/api/orders/user/${user._id}`)
+        .get(`${API_URL}/api/orders/user/${user._id}`)
         .then((response) => {
           setUserOrders(response.data);
         })
@@ -66,7 +69,7 @@ function OrderPage() {
     if (user.userPermission === "supplier") {
       console.log("Seller ID:", user._id);
       axios
-        .get(`http://localhost:5005/api/orders/products/${user._id}`)
+        .get(`${API_URL}/api/orders/products/${user._id}`)
         .then((response) => {
           console.log("Seller Orders:", response.data);
           setUserOrders(response.data);
@@ -80,7 +83,7 @@ function OrderPage() {
 
   function markOrderAsSent(orderId) {
     axios
-      .put(`http://localhost:5005/api/orders/products/${orderId}/mark-as-sent`)
+      .put(`${API_URL}/api/orders/products/${orderId}/mark-as-sent`)
       .then((response) => {
         const updatedOrders = userOrders.map((order) => {
           if (order._id === orderId) {

@@ -9,6 +9,9 @@ import Search from "../components/Search";
 import { useCart } from "../context/shop.context";
 import "../pages/ProductsList.css";
 
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+
+
 function ProductsList() {
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
@@ -69,7 +72,7 @@ function ProductsList() {
 
   function deleteProduct(id) {
     axios
-      .delete(`http://localhost:5005/api/products/${id}`)
+      .delete(`${API_URL}/api/products/${id}`)
       .then(() => {
         getProducts();
       })
