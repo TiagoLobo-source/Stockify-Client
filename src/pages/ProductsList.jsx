@@ -20,6 +20,15 @@ function ProductsList() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [query, setQuery] = useState("");
 
+
+  function limitDescription(description, maxLength) {
+    if (description.length <= maxLength) {
+      return description;
+    } else {
+      return description.slice(0, maxLength) + "...";
+    }
+  }
+
   function getProducts() {
     productsService
       .getAllProducts()
@@ -132,7 +141,7 @@ function ProductsList() {
             <Link to={`/productdetailspage/${oneProduct._id}`}>
               <h3>{oneProduct.title}</h3>
             </Link>
-            <h3>{oneProduct.description}</h3>
+            <p>{limitDescription(oneProduct.description, 30)}</p>
             <h3>
               {oneProduct.price.toLocaleString("en-US", {
                 style: "currency",

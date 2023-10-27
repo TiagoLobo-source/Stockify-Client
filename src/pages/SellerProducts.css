@@ -10,8 +10,8 @@
   }
   
   .product-card {
-  width: 250px; /* Set a fixed width for each card */
-  height: 350px; /* Set a fixed height for each card */
+  width: 250px; 
+  height: 450px;
   padding: 20px;
   border: none;
   background-color: #f8d8c9;

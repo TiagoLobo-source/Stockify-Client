@@ -32,4 +32,13 @@
   button:active {
     background-color: #0056b3;
   }
+
+  .success-message {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+  }
   

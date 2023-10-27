@@ -7,11 +7,10 @@ import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
-
 function ProductListHome() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(""); 
+  const [selectedCategory, setSelectedCategory] = useState("");
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const { cart, addToCart } = useCart();
 
@@ -19,8 +18,9 @@ function ProductListHome() {
     productsService
       .getAllProductsHome()
       .then((response) => {
-        
-        const filtered = response.data.filter((oneProduct) => oneProduct.isApproved);
+        const filtered = response.data.filter(
+          (oneProduct) => oneProduct.isApproved
+        );
         setFilteredProducts(filtered);
       })
       .catch((error) => {
@@ -31,9 +31,9 @@ function ProductListHome() {
   useEffect(() => {
     getProducts();
   }, []);
-const testproducts = filteredProducts.filter((products) =>
-products.title.toLowerCase().includes(query.toLowerCase())
-);
+  const testproducts = filteredProducts.filter((products) =>
+    products.title.toLowerCase().includes(query.toLowerCase())
+  );
 
   // A função handleSearch deve ser definida aqui para evitar erros.
   function handleSearch(query) {
@@ -50,8 +50,11 @@ products.title.toLowerCase().includes(query.toLowerCase())
     }
 
     return filteredProducts.filter((product) => {
-      const matchesCategory = selectedCategory === "" || product.category === selectedCategory;
-      const matchesQuery = product.title.toLowerCase().includes(query.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "" || product.category === selectedCategory;
+      const matchesQuery = product.title
+        .toLowerCase()
+        .includes(query.toLowerCase());
       return matchesCategory && matchesQuery;
     });
   }
@@ -59,29 +62,27 @@ products.title.toLowerCase().includes(query.toLowerCase())
   function addCart(id, product) {
     addToCart(product);
   }
-  
+
   return (
     <div className="ProductsListPage">
-     
-      
-  <form className="d-flex" role="search">
-            <input
-              className="form-control me-3"
-              type="search"
-              placeholder="Search for a product"
-              aria-label="Search"
-              value={query }
-              onChange={(e) => setQuery(e.target.value) }
-            />
-            <button
-              className="btn btn-outline-dark"
-              type="submit"
-              value={query}
-              onChange={(e) =>setQuery(e.target.value)}
-            >
-              Search
-            </button>
-          </form> 
+      <form className="d-flex" role="search">
+        <input
+          className="form-control me-3"
+          type="search"
+          placeholder="Search for a product"
+          aria-label="Search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button
+          className="btn btn-outline-dark"
+          type="submit"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        >
+          Search
+        </button>
+      </form>
       <select
         onChange={(e) => setSelectedCategory(e.target.value)}
         value={selectedCategory}
@@ -96,14 +97,20 @@ products.title.toLowerCase().includes(query.toLowerCase())
       <div className="product-cards">
         {filterProductsByCategory().map((oneProduct) => (
           <div className="product-card" key={oneProduct._id}>
-            <Link to={`/productdetailspage/${oneProduct._id}`}>
-              <h3>{oneProduct.title}</h3>
-              <h3>{oneProduct.description}</h3>
-              <h3>{oneProduct.price}</h3>
-              <h3>{oneProduct.stock}</h3>
-              <h3>{oneProduct.imageProduct}</h3>
-              <h3>{oneProduct.isPassed}</h3>
-            </Link>
+            <h3>{oneProduct.title}</h3>
+            <h3>{oneProduct.description}</h3>
+            <h3>
+              {oneProduct.price.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </h3>
+            <img
+              src={oneProduct.imageProduct}
+              className="product-image"
+              alt="Product"
+            />
+            <br />
 
             {user?.userPermission !== "user" && isLoggedIn && (
               <button
@@ -127,8 +134,6 @@ products.title.toLowerCase().includes(query.toLowerCase())
       </div>
     </div>
   );
-
- 
 }
 
 export default ProductListHome;

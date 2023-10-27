@@ -54,7 +54,7 @@ function ProductDetailsPage() {
         <Link to={"/products"}>
           <button>Go back to Products</button>
         </Link>
-        {(user?.userPermission === "user") && (
+        {(user?.userPermission === "user" ) && (
               <button className="addToCartBttn" onClick={() => addCart(id, product)}>
               Add To Cart
             </button>

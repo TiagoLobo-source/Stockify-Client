@@ -17,7 +17,7 @@ function EditProduct() {
     const [imageProduct, setImageProduct] = useState('')
     const { id } = useParams()
     const navigate = useNavigate()
-
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleFileUpload = (e) => {
         // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -68,7 +68,10 @@ function EditProduct() {
         productsService.updateProduct(id, { title, description, isPassed, isApproved, stock, price, imageProduct })
             // axios.put(`http://localhost:5005/api/products/${id}`,{title,description})
             .then((updatedProduct) => {
-                navigate(`/products/${id}`)
+                setSuccessMessage('Product updated successfully.');
+                setTimeout(() => {
+                  navigate('/products');
+                }, 5000);
             })
             .catch(err => {
                 console.log(err)
@@ -101,7 +104,11 @@ function EditProduct() {
                     Image Product
                     <input type="file"onChange={(e)=>{handleFileUpload(e)}}/>
                 </label>
-
+                <div>
+     
+    
+    </div>
+    {successMessage && <div className="success-message">{successMessage}</div>}
                 <button>Submit</button>
                 <button onClick={deleteProduct}>Delete</button>
             </form>
