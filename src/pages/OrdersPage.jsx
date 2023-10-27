@@ -94,6 +94,7 @@ function OrderPage() {
           }
           return order;
         });
+        console.log(updatedOrders)
         setUserOrders(updatedOrders);
       });
   }
@@ -156,7 +157,7 @@ function OrderPage() {
         </div>
       )}
 
-      {user.userPermission === "supplier" && (
+      {(user.userPermission === "supplier" || user.userPermission === "admin") && (
         <div>
           <h2>Seller Orders</h2>
           <ul>
