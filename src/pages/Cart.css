@@ -84,3 +84,8 @@
     margin-top: 10px;
     cursor: pointer;
   }
+  ul {
+    list-style-type: none;
+    padding: 0px;
+  }
+ 

@@ -55,7 +55,7 @@ function Cart() {
 
       axios
         .post(`${API_URL}/api/orders`, cartData)
-        .then((orderResponse) => {})
+        .then((orderResponse) => { })
         .catch((error) => {
           console.log("Error during order creation:", error);
         });
@@ -87,7 +87,7 @@ function Cart() {
 
   useEffect(() => {
     return () => {
-      setCheckoutSuccess(false); 
+      setCheckoutSuccess(false);
     };
   }, []);
 
@@ -97,53 +97,57 @@ function Cart() {
   }
 
   return (
-  <div className="order-cards-container">
-    
-    <div className="orders-card">
-      <h1>Shopping Cart</h1>
-      <ul>
-        {cart.map((item) => (
-          <li key={item._id}>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <p>Price: ${item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Total: ${item.quantity * item.price}</p>
-              <button className="action-button" onClick={() => addToCart(item)}>
-                Add to cart
-              </button>
-              <button
-                className="action-button"
-                onClick={() => removeFromCart(item._id)}
-              >
-                Remove
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p>Total: ${calculateTotal()}</p>
-      {!isLoggedIn && user?.userPermission !== "user" ? (
-        <Link to="/login">
-          <button className="checkout-button">Checkout</button>
-        </Link>
-      ) : (
-        <button className="checkout-button" onClick={handleSubmit}>
-          Checkout
-        </button>
+    <div className="order-cards-container">
+
+      <div className="orders-card">
+        <h1>Shopping Cart</h1>
+        <ul>
+          {cart.map((item) => (
+            <li key={item._id}>
+              <div>
+                <h3>{item.title}</h3>
+                {/* <p>{item.description}</p> */}
+                <p>Price: {item.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                <p>Quantity: {item.quantity}</p>
+                <p>Total: {(item.quantity * item.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                <button className="action-button" onClick={() => addToCart(item)}>
+                  Add to cart
+                </button>
+                <button
+                  className="action-button"
+                  onClick={() => removeFromCart(item._id)}
+                >
+                  Remove
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p>Purchase Total: {calculateTotal().toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+        {cart.length > 0 && ( 
+        <>
+          {!isLoggedIn && user?.userPermission !== "user" ? (
+            <Link to="/login">
+              <button className="checkout-button">Checkout</button>
+            </Link>
+          ) : (
+            <button className="checkout-button" onClick={handleSubmit}>
+              Checkout
+            </button>
+          )}
+        </>
       )}
-      <div className={`order-cards ${checkoutSuccess ? "show" : ""}`}>
-    <button className="close-button" onClick={closeSuccessMessage}>
-    
-        &times;
-         
-      </button>
-        Your purchase was successful! Thank you for shopping with us.
+        <div className={`order-cards ${checkoutSuccess ? "show" : ""}`}>
+          <button className="close-button" onClick={closeSuccessMessage}>
+
+            &times;
+
+          </button>          
+          Your purchase was successful! Thank you for shopping with us.
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
-);
+  );
 
 }
 

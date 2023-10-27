@@ -7,10 +7,11 @@ import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
+
 function ProductListHome() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(""); 
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   const { cart, addToCart } = useCart();
 
@@ -18,9 +19,8 @@ function ProductListHome() {
     productsService
       .getAllProductsHome()
       .then((response) => {
-        const filtered = response.data.filter(
-          (oneProduct) => oneProduct.isApproved
-        );
+        
+        const filtered = response.data.filter((oneProduct) => oneProduct.isApproved);
         setFilteredProducts(filtered);
       })
       .catch((error) => {
@@ -31,9 +31,9 @@ function ProductListHome() {
   useEffect(() => {
     getProducts();
   }, []);
-  const testproducts = filteredProducts.filter((products) =>
-    products.title.toLowerCase().includes(query.toLowerCase())
-  );
+const testproducts = filteredProducts.filter((products) =>
+products.title.toLowerCase().includes(query.toLowerCase())
+);
 
   // A função handleSearch deve ser definida aqui para evitar erros.
   function handleSearch(query) {
@@ -50,11 +50,8 @@ function ProductListHome() {
     }
 
     return filteredProducts.filter((product) => {
-      const matchesCategory =
-        selectedCategory === "" || product.category === selectedCategory;
-      const matchesQuery = product.title
-        .toLowerCase()
-        .includes(query.toLowerCase());
+      const matchesCategory = selectedCategory === "" || product.category === selectedCategory;
+      const matchesQuery = product.title.toLowerCase().includes(query.toLowerCase());
       return matchesCategory && matchesQuery;
     });
   }
@@ -62,27 +59,29 @@ function ProductListHome() {
   function addCart(id, product) {
     addToCart(product);
   }
-
+  
   return (
     <div className="ProductsListPage">
-      <form className="d-flex" role="search">
-        <input
-          className="form-control me-3"
-          type="search"
-          placeholder="Search for a product"
-          aria-label="Search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          className="btn btn-outline-dark"
-          type="submit"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        >
-          Search
-        </button>
-      </form>
+     
+      
+  <form className="d-flex" role="search">
+            <input
+              className="form-control me-3"
+              type="search"
+              placeholder="Search for a product"
+              aria-label="Search"
+              value={query }
+              onChange={(e) => setQuery(e.target.value) }
+            />
+            <button
+              className="btn btn-outline-dark"
+              type="submit"
+              value={query}
+              onChange={(e) =>setQuery(e.target.value)}
+            >
+              Search
+            </button>
+          </form> 
       <select
         onChange={(e) => setSelectedCategory(e.target.value)}
         value={selectedCategory}
@@ -128,6 +127,8 @@ function ProductListHome() {
       </div>
     </div>
   );
+
+ 
 }
 
 export default ProductListHome;

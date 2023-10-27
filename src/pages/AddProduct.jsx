@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import productsService from "../services/ProductsService";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import "../pages/AddProduct.css";
 const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
- 
+
 function AddProducts(props) {
   const [title, setTitle] = useState("");
   const [stock, setStock] = useState(0);
@@ -13,36 +14,37 @@ function AddProducts(props) {
   const [imageProduct, setImageProduct] = useState("");
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const [category, setSelectedCategory] = useState("Electronics");
-
-  const categories = ["Electronics", "Clothing", "Furniture", "Books", "Other"];
+  const [isUploading, setIsUploading] = useState(false);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
- 
+  const categories = ["Electronics", "Clothing", "Furniture", "Books", "Other"]; // Define the categories array
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
   };
 
-  const navigate = useNavigate();
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
 
-    const handleFileUpload = (e) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
- 
+    if (!file) return;
+
     const uploadData = new FormData();
- 
-    // imageUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new movie in '/api/movies' POST route
-    uploadData.append("imageUrl", e.target.files[0]);
- 
-     axios.post(`${API_URL}/api/upload`, uploadData)
-      .then(response => {
-         console.log("response is: ", response.data.fileUrl);
-        // response carries "fileUrl" which we can use to update the state
+    uploadData.append("imageUrl", file);
+
+    setIsUploading(true);
+
+    axios
+      .post(`${API_URL}/api/upload`, uploadData)
+      .then((response) => {
         setImageProduct(response.data.fileUrl);
+        setIsUploading(false);
       })
-      .catch(err => console.log("Error while uploading the file: ", err));
+      .catch((err) => {
+        console.log("Error while uploading the file: ", err);
+        setIsUploading(false);
+      });
   };
 
   function handleSubmit(e) {
@@ -59,12 +61,7 @@ function AddProducts(props) {
     };
     productsService
       .createProduct(newProduct)
-      //axios.post("http://localhost:5005/api/products", newProduct)
-
       .then(() => {
-        // alert("Product successfully Created");
-        // props.getProducts();
-   
         setTitle("");
         setDescription("");
         setStock(0);
@@ -76,9 +73,7 @@ function AddProducts(props) {
         setErrorMessage(error.response.data.message);
       });
   }
-  //console.log(props);
 
-  
   return (
     <div className="AddProduct">
       <h3>Add Product</h3>
@@ -91,6 +86,7 @@ function AddProducts(props) {
             onChange={(e) => {
               setTitle(e.target.value);
             }}
+            required
           />
         </label>
 
@@ -102,6 +98,7 @@ function AddProducts(props) {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
+            required
           />
         </label>
 
@@ -113,6 +110,7 @@ function AddProducts(props) {
             onChange={(e) => {
               setStock(e.target.value);
             }}
+            required
           />
         </label>
 
@@ -124,14 +122,16 @@ function AddProducts(props) {
             onChange={(e) => {
               setPrice(e.target.value);
             }}
+            required
           />
         </label>
+
         <label>
           Image Product
           <input
             type="file"
-            onChange={(e)=>{handleFileUpload(e)}}
-            
+            onChange={(e) => handleFileUpload(e)}
+            required
           />
         </label>
 
@@ -150,7 +150,9 @@ function AddProducts(props) {
           </select>
         </div>
 
-        <button>Submit</button>
+        <button type="submit" disabled={isUploading}>
+          {isUploading ? "Uploading..." : "Submit"}
+        </button>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
       </form>
     </div>

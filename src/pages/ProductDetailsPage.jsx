@@ -44,11 +44,15 @@ function ProductDetailsPage() {
           <>
             <h1>{product.title}</h1>
             <p>{product.description}</p>
+            <h3>{product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h3>
+            <h3>Quantity in stock: {product.stock}</h3>             
+            <img src={product.imageProduct} alt={product.title} />
+            <br />
           </>
         )}
 
         <Link to={"/products"}>
-          <button>Go back to Product</button>
+          <button>Go back to Products</button>
         </Link>
         {(user?.userPermission === "user") && (
               <button className="addToCartBttn" onClick={() => addCart(id, product)}>

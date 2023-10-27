@@ -78,30 +78,29 @@ function ProductsList() {
     setSearchQuery(query);
   }
 
-  
-
   function filterProductsByCategory() {
     if (selectedCategory === "") {
       return filteredProducts2;
     }
-    return filteredProducts2.filter((product) => product.category === selectedCategory);
+    return filteredProducts2.filter(
+      (product) => product.category === selectedCategory
+    );
   }
 
   return (
     <div className="ProductsListPage">
-       {isLoggedIn && (
-          <nav>
-            {(user.userPermission === "supplier" ||
-              user.userPermission === "admin") && (
-              <>
-                <Link to="/addproducts">
-                  <button>Add Products</button>
-                </Link>
-                
-              </>
-            )}
-          </nav>
-        )}
+      {isLoggedIn && (
+        <nav>
+          {(user.userPermission === "supplier" ||
+            user.userPermission === "admin") && (
+            <>
+              <Link to="/addproducts">
+                <button>Add Products</button>
+              </Link>
+            </>
+          )}
+        </nav>
+      )}
       <form className="d-flex" role="search" onSubmit={handleSearchSubmit}>
         <input
           className="form-control me-3"
@@ -115,7 +114,7 @@ function ProductsList() {
           Search
         </button>
       </form>
-      
+
       <select
         onChange={(e) => setSelectedCategory(e.target.value)}
         value={selectedCategory}
@@ -132,12 +131,23 @@ function ProductsList() {
           <div className="product-card" key={oneProduct._id}>
             <Link to={`/productdetailspage/${oneProduct._id}`}>
               <h3>{oneProduct.title}</h3>
-              <h3>{oneProduct.description}</h3>
-              <h3>{oneProduct.price}</h3>
-              <h3>{oneProduct.stock}</h3>
-              <h3>{oneProduct.imageProduct}</h3>
-              <h3>{oneProduct.isPassed}</h3>
             </Link>
+            <h3>{oneProduct.description}</h3>
+            <h3>
+              {oneProduct.price.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </h3>
+            <img
+              src={oneProduct.imageProduct}
+              className="product-image"
+              alt="Product"
+            />
+            <br />
+            {user?.userPermission !== "user" && isLoggedIn && (
+              <h3>{oneProduct.isPassed}</h3>
+            )}
 
             {user?.userPermission !== "user" && isLoggedIn && (
               <button
@@ -149,29 +159,23 @@ function ProductsList() {
               </button>
             )}
             {(user?.userPermission === "user" || !isLoggedIn) && (
-              <button
-                className="addToCartBttn"
-                onClick={() => addCart(oneProduct._id, oneProduct)}
-              >
-                Add To Cart
-              </button>
+             <div className="button-row">
+             <Link to={`/productdetailspage/${oneProduct._id}`}>
+               <button className="addToCartBttn seeDetailBttn">See Details</button>
+             </Link>
+             <button
+               className="addToCartBttn"
+               onClick={() => addCart(oneProduct._id, oneProduct)}
+             >
+               Add To Cart
+             </button>
+           </div>
             )}
           </div>
         ))}
       </div>
     </div>
   );
- 
-
-
-  function filterProductsByCategory() {
-    if (selectedCategory === "") {
-      
-      return filteredProducts2;
-    }
-   
-    return filteredProducts2.filter((product) => product.category === selectedCategory);
-  }
 }
 
 export default ProductsList;

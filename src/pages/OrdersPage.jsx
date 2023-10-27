@@ -15,6 +15,15 @@ function OrderPage() {
   const [trackingData, setTrackingData] = useState({});
   const [buttonText, setButtonText] = useState("Send");
 
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  function formatTime(timeString) {
+    return new Date(timeString).toLocaleTimeString();
+  }
+
   function openTrackingModal(order) {
     setIsTrackingModalOpen(true);
     setTrackingData(order);
@@ -65,7 +74,7 @@ function OrderPage() {
         .catch((error) => {
           console.error("Error fetching seller orders:", error);
         });
-        markOrderAsSent
+      markOrderAsSent;
     }
   }, [user]);
 
@@ -73,7 +82,6 @@ function OrderPage() {
     axios
       .put(`http://localhost:5005/api/orders/products/${orderId}/mark-as-sent`)
       .then((response) => {
-       
         const updatedOrders = userOrders.map((order) => {
           if (order._id === orderId) {
             return {
@@ -84,10 +92,8 @@ function OrderPage() {
           return order;
         });
         setUserOrders(updatedOrders);
-      })
-      
+      });
   }
-  
 
   const modalStyles = {
     content: {
@@ -124,8 +130,15 @@ function OrderPage() {
                 {order.orders[0]?.transactionType === "Backlog"
                   ? "Awaiting to be shipped"
                   : order.orders[0]?.transactionType}
-                <p>Amount: {order.orders[0]?.amount}</p>
-                <p>Transaction ID: {order.transactionId}</p>
+                <p>
+                  Amount:{" "}
+                  {order.orders[0]?.amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </p>
+                <p>Date: {formatDate(order.orders[0].date)}</p>
+                <p>Time: {formatTime(order.orders[0].date)}</p>
                 <button onClick={() => openTrackingModal(order)}>
                   Track Order
                 </button>
@@ -150,17 +163,22 @@ function OrderPage() {
                 {order.orders[0]?.transactionType === "Backlog"
                   ? "Awaiting to be shipped"
                   : order.orders[0]?.transactionType}
-                <p>Amount: {order.orders[0]?.amount}</p>
-                <p>Transaction ID: {order.transactionId}</p>
+                <p>
+                  Amount:{" "}
+                  {order.orders[0]?.amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </p>
+                <p>Date: {formatDate(order.orders[0].date)}</p>
+                <p>Time: {formatTime(order.orders[0].date)}</p>
                 {order.orders[0].transactionType === "Backlog" && (
                   <button onClick={() => markOrderAsSent(order._id)}>
-                     Send
+                    Send
                   </button>
                 )}
                 {order.orders[0].transactionType === "Sent" && (
-                  <button>
-                     On the way!
-                  </button>
+                  <button>On the way!</button>
                 )}
               </li>
             ))}
@@ -184,22 +202,43 @@ function OrderPage() {
                     orderData.products.map((product, productIndex) => (
                       <div key={productIndex}>
                         <p>Transaction Type: {product.quantity}</p>
-                        <p>Price: {product.price}</p>
+                        <p>
+                          Price:{" "}
+                          {product.price.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
+                        </p>
+                        <p>
+                          Tracking Link:{" "}
+                          <a
+                            href="https://t.17track.net/en#nums=DW419756486PT"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Track Your Order
+                          </a>
+                        </p>
                       </div>
                     ))}
                 </div>
               ))}
           </div>
           <p>
-            Tracking Link:{" "}
-            <a
-              href="https://t.17track.net/en#nums=DW419756486PT"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Track Your Order
-            </a>
+            Date:{" "}
+            {trackingData &&
+              trackingData.orders &&
+              trackingData.orders[0] &&
+              formatDate(trackingData.orders[0].date)}
           </p>
+          <p>
+            Time:{" "}
+            {trackingData &&
+              trackingData.orders &&
+              trackingData.orders[0] &&
+              formatTime(trackingData.orders[0].date)}
+          </p>
+
           <div style={modalbutton}>
             <button onClick={() => setIsTrackingModalOpen(false)}>Close</button>
           </div>

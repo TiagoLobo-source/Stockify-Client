@@ -1,9 +1,50 @@
 /* SignupPage.css */
-.SignupPage {
+.Container {
+ 
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #cfbcb3 50%, #ffffff 50%);
+  min-height: 100vh;
+}
+
+.TwoColumnLayout {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+
+.StyledSection {
+  width: 50%; 
+  padding: 20px;
+  text-align: center;
+}
+
+.StyledSection img {
+  display: block; 
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+
+.FormSection {
+  width: 50%; 
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin: 50px;
+}
+
 
 h1 {
   text-align: center;
@@ -13,7 +54,7 @@ h1 {
 }
 
 .form-group {
-  margin: 10px 0;
+  margin: 0px;
 }
 
 label {
@@ -32,15 +73,15 @@ input[type="password"] {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.card h1 {
-  margin: 0 0 10px 0;
-}
+
 .radio-group {
   margin: 5px 0;
 }
+
 .radio-group p {
   margin: 5px 0;
 }
+
 .radio-option {
   display: flex;
   align-items: center;
@@ -67,9 +108,6 @@ input[type="radio"] {
 .element {
   overflow: hidden;
 }
-body {
-  min-height: 100vh;
-}
 
 .radio-options-container {
   display: flex;
@@ -84,27 +122,8 @@ body {
 .button-signup {
   width: 100%;
   margin: 0;
-}
+  background-color:  #cfbcb3;
+  color: black;
+  font-weight: 1000;
 
-.Container {
-  max-width: 100%;
- 
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background: linear-gradient(to right, #cfbcb3 50%, #ffffff 50%);
-  min-height: 100vh;
-}
-
-.card {
-  position: relative;
-  width: 500px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: 30%;
- 
 }

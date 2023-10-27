@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
-import "./PersonalDetails.css"; 
+import "./PersonalDetails.css";
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005'
 
@@ -54,7 +54,7 @@ function PersonalDetails() {
   }
 
   return (
-  
+
     <div className="container">
       <h2>Personal Details</h2>
       {isEditing ? (
@@ -78,7 +78,7 @@ function PersonalDetails() {
             />
           </label>{" "}
           {user.userPermission === "supplier" ||
-          user.userPermission === "admin" ? (
+            user.userPermission === "admin" ? (
             <label>
               <>Date founded:</>
               <input
@@ -154,12 +154,18 @@ function PersonalDetails() {
           <p>Mobile Phone: {userData.mobilePhone}</p>
           <p>
             {user.userPermission === "supplier" ||
-            user.userPermission === "admin" ? (
+              user.userPermission === "admin" ? (
               <>Date founded:</>
             ) : (
               <>Date of birth:</>
             )}{" "}
-            {userData.dateOfBirth}
+
+            {userData.dateOfBirth && (
+              <p>Data de Nascimento: {userData.dateOfBirth.slice(0, 10)}</p>
+            )}
+
+            {/* {userData.dateOfBirth.slice(0, 10)} */}
+            {/* {userData.dateOfBirth} */}
           </p>
           <p>Address: {userData.address}</p>
           <p>Post Code: {userData.postCode}</p>
