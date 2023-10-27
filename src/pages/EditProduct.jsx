@@ -67,12 +67,13 @@ function EditProduct() {
         e.preventDefault()
         productsService.updateProduct(id, { title, description, isPassed, isApproved, stock, price, imageProduct })
             // axios.put(`http://localhost:5005/api/products/${id}`,{title,description})
-            .then((updatedProduct) => {
+            .then(() => {
+                console.log('Product updated successfully'); 
                 setSuccessMessage('Product updated successfully.');
                 setTimeout(() => {
                   navigate('/products');
                 }, 5000);
-            })
+              })
             .catch(err => {
                 console.log(err)
             })

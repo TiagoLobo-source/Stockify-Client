@@ -97,7 +97,7 @@ function ProductListHome() {
       <div className="product-cards">
         {filterProductsByCategory().map((oneProduct) => (
           <div className="product-card" key={oneProduct._id}>
-            <h3>{oneProduct.title}</h3>
+            <div><h3>{oneProduct.title}</h3></div>
             <h3>{oneProduct.description}</h3>
             <h3>
               {oneProduct.price.toLocaleString("en-US", {

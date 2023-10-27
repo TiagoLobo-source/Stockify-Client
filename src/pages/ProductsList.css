@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: center; 
   text-align: center; 
-  height: 600px;
+  height: 400px;
 }
 
 .product-card:hover {
@@ -47,4 +47,35 @@
 
 .product-details-button:hover {
   background-color: #0056b3;
+}
+
+
+.card-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.title-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.description-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.price-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.title-container h3,
+.description-container h3,
+.price-container h3 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
