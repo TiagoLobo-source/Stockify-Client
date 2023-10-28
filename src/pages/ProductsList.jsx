@@ -139,54 +139,59 @@ function ProductsList() {
         <option value="Other">Other</option>
       </select>
       <div className="product-cards">
-        {filterProductsByCategory().map((oneProduct) => (
-          <div className="product-card" key={oneProduct._id}>
-             <div className="title-container">
-            <Link to={`/productdetailspage/${oneProduct._id}`}>
-              <h3>{oneProduct.title}</h3>
-            </Link>
-            </div>
-            <p>{limitDescription(oneProduct.description, 30)}</p>
-            <h3>
-              {oneProduct.price.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </h3>
-            <img
-              src={oneProduct.imageProduct}
-              className="product-image"
-              alt="Product"
-            />
-            <br />
-            {user?.userPermission !== "user" && isLoggedIn && (
-              <h3>{oneProduct.isPassed}</h3>
-            )}
+      {filterProductsByCategory().map((oneProduct) => (
+  <div className="product-card" key={oneProduct._id}>
+    <div className={`small-card ${oneProduct.isPassed}`}>
+      {oneProduct.isPassed}
+    </div>
 
-            {user?.userPermission !== "user" && isLoggedIn && (
-              <button
-                onClick={() => {
-                  deleteProduct(oneProduct._id);
-                }}
-              >
-                Delete
-              </button>
-            )}
-            {(user?.userPermission === "user" || !isLoggedIn) && (
-             <div className="button-row">
-             <Link to={`/productdetailspage/${oneProduct._id}`}>
-               <button className="addToCartBttn seeDetailBttn">See Details</button>
-             </Link>
-             <button
-               className="addToCartBttn"
-               onClick={() => addCart(oneProduct._id, oneProduct)}
-             >
-               Add To Cart
-             </button>
-           </div>
-            )}
-          </div>
-        ))}
+    <div className="title-container">
+      <Link to={`/productdetailspage/${oneProduct._id}`}>
+        <h3>{oneProduct.title}</h3>
+      </Link>
+    </div>
+    <p>{limitDescription(oneProduct.description, 30)}</p>
+    <h3>
+      {oneProduct.price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      })}
+    </h3>
+    <img
+      src={oneProduct.imageProduct}
+      className="product-image"
+      alt="Product"
+    />
+    <br />
+    {user?.userPermission !== "user" && isLoggedIn && (
+      <h3>{oneProduct.isPassed}</h3>
+    )}
+
+    {user?.userPermission !== "user" && isLoggedIn && (
+      <button
+        onClick={() => {
+          deleteProduct(oneProduct._id);
+        }}
+      >
+        Delete
+      </button>
+    )}
+
+    {(user?.userPermission === "user" || !isLoggedIn) && (
+      <div className="button-row">
+        <Link to={`/productdetailspage/${oneProduct._id}`}>
+          <button className="addToCartBttn seeDetailBttn">See Details</button>
+        </Link>
+        <button
+          className="addToCartBttn"
+          onClick={() => addCart(oneProduct._id, oneProduct)}
+        >
+          Add To Cart
+        </button>
+      </div>
+    )}
+  </div>
+))}
       </div>
     </div>
   );

@@ -79,27 +79,3 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
-
-
-.product-card .small-card {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-}
-
-
-.product-card .small-card.approved {
-  background-color: #008000; 
-}
-
-.product-card .small-card.refused {
-  background-color: #FF0000; 
-}
-
-.product-card .small-card.pending {
-  background-color: #FFFF00; 
-}
