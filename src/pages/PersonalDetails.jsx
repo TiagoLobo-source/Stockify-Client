@@ -145,7 +145,7 @@ function PersonalDetails() {
             />
           </label>
           <button type="button" onClick={handleSaveClick}>
-            Salvar
+            Save
           </button>
         </form>
       ) : (
@@ -161,7 +161,7 @@ function PersonalDetails() {
             )}{" "}
 
             {userData.dateOfBirth && (
-              <p>Data de Nascimento: {userData.dateOfBirth.slice(0, 10)}</p>
+              <p>Date of birth: {userData.dateOfBirth.slice(0, 10)}</p>
             )}
 
             {/* {userData.dateOfBirth.slice(0, 10)} */}
