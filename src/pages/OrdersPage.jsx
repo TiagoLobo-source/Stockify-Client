@@ -66,24 +66,35 @@ function OrderPage() {
   }, [user]);
 
   useEffect(() => {
-    productsService
-      .getProduct(id)
-      .then((response) => {
-        setProduct(response.data);
-      })
-     
-    if (user.userPermission === "supplier"|| user.userPermission === "admin") {
+    if (user.userPermission === "supplier" || user.userPermission === "admin") {
       console.log("Seller ID:", user._id);
       axios
         .get(`${API_URL}/api/orders/products/${user._id}`)
         .then((response) => {
           console.log("Seller Orders:", response.data);
           setUserOrders(response.data);
+  
+          
+          const productIds = response.data.map((order) => order.orders[0].products[0].product);
+  
+       
+          const productPromises = productIds.map((productId) =>
+            axios.get(`${API_URL}/api/products/${productId}`)
+          );
+  
+         
+          Promise.all(productPromises)
+            .then((productsData) => {
+              const productsArray = productsData.map((response) => response.data);
+              setProducts(productsArray);
+            })
+            .catch((error) => {
+              console.error("Error fetching product details:", error);
+            });
         })
         .catch((error) => {
           console.error("Error fetching seller orders:", error);
         });
-      markOrderAsSent;
     }
   }, [user]);
 
@@ -149,14 +160,18 @@ function OrderPage() {
           </p>
           <p>Date: {formatDate(order.orders[0].date)}</p>
           <p>Time: {formatTime(order.orders[0].date)}</p>
-          {order.orders[0]?.products.map((product, productIndex) => (
-            <div key={productIndex}>
-              <h3>Product Details</h3>
-              <p>Product Name: {product.product.title}</p>
-              <p>Product Price: ${product.product.price}</p>
-              
-            </div>
-          ))}
+          <div>
+    <h2>Product Details</h2>
+    <ul>
+      {products.map((product) => (
+        <li key={product._id}>
+          <p>Product Name: {product.title}</p>
+          <p>Product Price: ${product.price}</p>
+         
+        </li>
+      ))}
+    </ul>
+  </div>
           <button onClick={() => openTrackingModal(order)}>
             Track Order
           </button>
