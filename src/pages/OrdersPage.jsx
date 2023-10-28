@@ -124,38 +124,45 @@ function OrderPage() {
 
   return (
     <div>
-      {user.userPermission === "user" && (
-        <div>
-          <h2>User Orders</h2>
-          <ul>
-            {userOrders.map((order) => (
-              <li key={order._id}>
-                Transaction Type:{" "}
-                {order.orders[0]?.transactionType === "Backlog"
-                  ? "Awaiting to be shipped"
-                  : order.orders[0]?.transactionType}
-                <p>
-                  Amount:{" "}
-                  {order.orders[0]?.amount.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
-                </p>
-                <p>Date: {formatDate(order.orders[0].date)}</p>
-                <p>Time: {formatTime(order.orders[0].date)}</p>
-                <button onClick={() => openTrackingModal(order)}>
-                  Track Order
-                </button>
-                {order.orders[0].transactionType === "Backlog" && (
-                  <button onClick={() => deleteOrder(order._id)}>
-                    Cancel Order
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+     {user.userPermission === "user" && (
+  <div>
+    <h2>User Orders</h2>
+    <ul>
+      {userOrders.map((order) => (
+        <li key={order._id}>
+          Transaction Type:{" "}
+          {order.orders[0]?.transactionType === "Backlog"
+            ? "Awaiting to be shipped"
+            : order.orders[0]?.transactionType}
+          <p>
+            Amount:{" "}
+            {order.orders[0]?.amount.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </p>
+          <p>Date: {formatDate(order.orders[0].date)}</p>
+          <p>Time: {formatTime(order.orders[0].date)}</p>
+          {order.orders[0]?.products.map((product) => (
+            <div key={product.product._id}>
+              <h3>Product Details</h3>
+              <p>Product Name: {product.product.name}</p>
+              <p>Product Price: ${product.product.price}</p>
+            </div>
+          ))}
+          <button onClick={() => openTrackingModal(order)}>
+            Track Order
+          </button>
+          {order.orders[0].transactionType === "Backlog" && (
+            <button onClick={() => deleteOrder(order._id)}>
+              Cancel Order
+            </button>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
 
       {(user.userPermission === "supplier" || user.userPermission === "admin") && (
         <div>
@@ -174,8 +181,8 @@ function OrderPage() {
                     currency: "USD",
                   })}
                 </p>
-                <p>Date: {formatDate(order.orders[0].date)}</p>
-                <p>Time: {formatTime(order.orders[0].date)}</p>
+                <p>Transaction Date: {formatDate(order.orders[0].date)}</p>
+                <p>{formatTime(order.orders[0].date)}</p>
                 {order.orders[0].transactionType === "Backlog" && (
                   <button onClick={() => markOrderAsSent(order._id)}>
                     Send
