@@ -110,7 +110,7 @@ function Cart() {
                 <p>Price: {item.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>Total: {(item.quantity * item.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                <button className="action-button" onClick={() => addToCart(item)}>
+                <button className="action-button" onClick={() => addToCart(item)} style={{marginBottom:"10px"}}>
                   Add to cart
                 </button>
                 <button

@@ -180,7 +180,7 @@ function ProductsList() {
     {(user?.userPermission === "user" || !isLoggedIn) && (
       <div className="button-row">
         <Link to={`/productdetailspage/${oneProduct._id}`}>
-          <button className="addToCartBttn seeDetailBttn">See Details</button>
+          <button className="addToCartBttn seeDetailBttn" style={{marginBottom:"10px"}}>See Details</button>
         </Link>
         <button
           className="addToCartBttn"
