@@ -1,5 +1,5 @@
 import React from 'react';
-
+import hero from "../images/hero.png"
 function importAll(r) {
     return r.keys().map(r);
   }
@@ -147,7 +147,7 @@ function ProductCard({ imageUrl, title, category, price }) {
     return (
       <div className="col" style={{ margin: '20px 20px' }}>
         <div className="card card-cover h-100 overflow-hidden text-white rounded-4 shadow-lg" style={{ backgroundColor: '#181412' }}>
-          <img src={imageUrl} className="card-img-top" alt={title} />
+          <img src = {hero} className="card-img-top" alt={title} />
           <div className="card-body p-4">
             <h5 className="card-title" style={{ fontSize: '20px', fontWeight: 700 }}>
               {title}
@@ -186,67 +186,6 @@ function ProductCard({ imageUrl, title, category, price }) {
     );
   }
   
-  function AppHome() {
-    const products = [
-        {
-          imageUrl: images[0],
-          title: 'Product 1',
-          category: 'Category 1',
-          price: '$100',
-        },
-        {
-          imageUrl: images[1],
-          title: 'Product 2',
-          category: 'Category 2',
-          price: '$150',
-        },
-      {
-        imageUrl: images[1],
-        title: 'Product 3',
-        category: 'Category 3',
-        price: '$80',
-      },
-      {
-        imageUrl:images[1],
-        title: 'Product 4',
-        category: 'Category 4',
-        price: '$120',
-      },
-      {
-        imageUrl: images[1],
-        title: 'Product 5',
-        category: 'Category 5',
-        price: '$200',
-      },
-      {
-        imageUrl: images[1],
-        title: 'Product 6',
-        category: 'Category 6',
-        price: '$90',
-      },
-    ];
-  
-    return (
-      <div className="container py-4">
-      <h4>ALL PRODUCTS</h4>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {products.map((product, index) => (
-          <div key={index} className="col">
-            <ProductCard
-              imageUrl={product.imageUrl}
-              title={product.title}
-              category={product.category}
-              price={product.price}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-    
 
-      
-    );
-  
-}
 
 export default App;
