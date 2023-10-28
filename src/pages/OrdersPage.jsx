@@ -144,10 +144,10 @@ function OrderPage() {
           <p>Date: {formatDate(order.orders[0].date)}</p>
           <p>Time: {formatTime(order.orders[0].date)}</p>
           {order.orders[0]?.products.map((product) => (
-            <div key={product.product._id}>
+            <div key={product.products._id}>
               <h3>Product Details</h3>
-              <p>Product Name: {product.product.name}</p>
-              <p>Product Price: ${product.product.price}</p>
+              <p>Product Name: {product.products.name}</p>
+              <p>Product Price: ${product.products.price}</p>
             </div>
           ))}
           <button onClick={() => openTrackingModal(order)}>
