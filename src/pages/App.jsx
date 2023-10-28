@@ -228,22 +228,23 @@ function ProductCard({ imageUrl, title, category, price }) {
   
     return (
       <div className="container py-4">
-        <h4>ALL PRODUCTS</h4>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          {products.map((product, index) => (
+      <h4>ALL PRODUCTS</h4>
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {products.map((product, index) => (
+          <div key={index} className="col">
             <ProductCard
-              key={index}
               imageUrl={product.imageUrl}
               title={product.title}
               category={product.category}
               price={product.price}
             />
-            
-          ))}
-
-          
-        </div>
+          </div>
+        ))}
       </div>
+    </div>
+    
+
+      
     );
   
 }

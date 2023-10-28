@@ -45,8 +45,7 @@ function LoginPage(props) {
         {/* Left Column*/}
         <div className="StyledSection">
           <img src = {hero} alt="Random Image" />
-          <h1>Welcome to Our Website</h1>
-          <p>This is some styled content on the left side.</p>
+          
         </div>
         <div className="FormSection">
           <div className="card">
