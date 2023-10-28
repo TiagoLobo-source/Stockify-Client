@@ -17,6 +17,15 @@ function SellerProducts() {
   const path = useLocation();
   const [isChecked, setIsChecked] = useState(false);
 
+
+  function limitDescription(description, maxLength) {
+    if (description.length <= maxLength) {
+      return description;
+    } else {
+      return description.slice(0, maxLength) + "...";
+    }
+  }
+
   function getProducts() {
     // Fetch the data for all projects when the component first loads
     productsService
