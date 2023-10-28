@@ -11,7 +11,7 @@ Modal.setAppElement("#root");
 
 function OrderPage() {
   const { user } = useContext(AuthContext);
-
+  const { id } = useParams();
   const [userOrders, setUserOrders] = useState([]);
   const [sellerOrders, setSellerOrders] = useState([]);
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
