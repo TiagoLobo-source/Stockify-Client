@@ -17,6 +17,7 @@ function OrderPage() {
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
   const [trackingData, setTrackingData] = useState({});
   const [buttonText, setButtonText] = useState("Send");
+  const [products, setProducts] = useState([]);
 
   function formatDate(dateString) {
     const options = { year: "numeric", month: "long", day: "numeric" };
