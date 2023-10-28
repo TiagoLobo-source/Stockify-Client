@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignupPage.css";
 import authService from "../services/AuthService";
-import hero from "../images/hero.png"
+import hero from "../images/login.png"
 
 const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
 
