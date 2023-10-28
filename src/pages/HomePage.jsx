@@ -23,7 +23,7 @@ const Content = styled.main`
 `;
 
 const Footer = styled.footer`
-  background-color: #333;
+  background-color: #F7ECE7;
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -39,7 +39,7 @@ function HomePage() {
         <App></App>
       </Content>
 
-      <Footer>&copy; {new Date().getFullYear()} My Website</Footer>
+      <Footer>&copy; {new Date().getFullYear()} Stockify</Footer>
     </Container>
   );
 }
