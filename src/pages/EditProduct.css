@@ -29,13 +29,7 @@
   }
   
  
-  button:active {
-    width: 100%;
-    margin: 0;
-    background-color:  #827772;
-    color: black;
-    font-weight: 1000;
-  }
+
 
   .success-message {
     background-color: #28a745;
