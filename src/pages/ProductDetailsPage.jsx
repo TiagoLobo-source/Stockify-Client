@@ -46,7 +46,7 @@ function ProductDetailsPage() {
             <p>{product.description}</p>
             <h3>{product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h3>
             <h3>Quantity in stock: {product.stock}</h3>             
-            <img src={product.imageProduct} alt={product.title} />
+            <img src={product.imageProduct} alt={product.title} style={{width:"20%"}} />
             <br />
           </>
         )}
