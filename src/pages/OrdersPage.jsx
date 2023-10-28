@@ -63,8 +63,10 @@ function OrderPage() {
         .catch((error) => {
           console.error("Error fetching user orders:", error);
         });
-
     }
+  }, [user]);
+
+  useEffect(() => {
     if (user.userPermission === "supplier" || user.userPermission === "admin") {
       console.log("Seller ID:", user._id);
       axios
@@ -72,16 +74,20 @@ function OrderPage() {
         .then((response) => {
           console.log("Seller Orders:", response.data);
           setUserOrders(response.data);
-  
-          const productIds = response.data.map((order) => order.orders[0].products[0].product);
-  
+
+          const productIds = response.data.map(
+            (order) => order.orders[0].products[0].product
+          );
+
           const productPromises = productIds.map((productId) =>
             axios.get(`${API_URL}/api/products/${productId}`)
           );
-  
+
           Promise.all(productPromises)
             .then((productsData) => {
-              const productsArray = productsData.map((response) => response.data);
+              const productsArray = productsData.map(
+                (response) => response.data
+              );
               console.log("Fetched Products:", productsArray); // Add this line
               setProducts(productsArray);
             })
@@ -94,39 +100,6 @@ function OrderPage() {
         });
     }
   }, [user]);
-
-
-    useEffect(() => {
-      if (user.userPermission === "supplier" || user.userPermission === "admin") {
-        console.log("Seller ID:", user._id);
-        axios
-          .get(`${API_URL}/api/orders/products/${user._id}`)
-          .then((response) => {
-            console.log("Seller Orders:", response.data);
-            setUserOrders(response.data);
-    
-            const productIds = response.data.map((order) => order.orders[0].products[0].product);
-    
-            const productPromises = productIds.map((productId) =>
-              axios.get(`${API_URL}/api/products/${productId}`)
-            );
-    
-            Promise.all(productPromises)
-              .then((productsData) => {
-                const productsArray = productsData.map((response) => response.data);
-                console.log("Fetched Products:", productsArray); // Add this line
-                setProducts(productsArray);
-              })
-              .catch((error) => {
-                console.error("Error fetching product details:", error);
-              });
-          })
-          .catch((error) => {
-            console.error("Error fetching seller orders:", error);
-          });
-      }
-    }, [user]);
-    
 
   function markOrderAsSent(orderId) {
     axios
@@ -141,7 +114,7 @@ function OrderPage() {
           }
           return order;
         });
-        console.log(updatedOrders)
+        console.log(updatedOrders);
         setUserOrders(updatedOrders);
       });
   }
@@ -171,53 +144,51 @@ function OrderPage() {
 
   return (
     <div>
-     {user.userPermission === "user" && (
-  <div>
-    <h2>User Orders</h2>
-    <ul>
-      {userOrders.map((order) => (
-        <li key={order._id}>
-          Transaction Type:{" "}
-          {order.orders[0]?.transactionType === "Backlog"
-            ? "Awaiting to be shipped"
-            : order.orders[0]?.transactionType}
-          <p>
-            Amount:{" "}
-            {order.orders[0]?.amount.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
-          </p>
-          <p>Date: {formatDate(order.orders[0].date)}</p>
-          <p>Time: {formatTime(order.orders[0].date)}</p>
-          <div>
-    <h2>Product Details</h2>
-   
-    <ul>
-      {products.map((product) => (
-        <li key={product._id}>
-          <p>Product Name: {product.title}</p>
-          <p>Product Price: ${product.price}</p>
-         
-        </li>
-      ))}
-    </ul>
-  </div>
-          <button onClick={() => openTrackingModal(order)}>
-            Track Order
-          </button>
-          {order.orders[0].transactionType === "Backlog" && (
-            <button onClick={() => deleteOrder(order._id)}>
-              Cancel Order
-            </button>
-          )}
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+      {user.userPermission === "user" && (
+        <div>
+          <h2>User Orders</h2>
+          <ul>
+            {userOrders.map((order) => (
+              <li key={order._id}>
+                Transaction Type:{" "}
+                {order.orders[0]?.transactionType === "Backlog"
+                  ? "Awaiting to be shipped"
+                  : order.orders[0]?.transactionType}
+                <p>
+                  Amount:{" "}
+                  {order.orders[0]?.amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </p>
+                <p>Date: {formatDate(order.orders[0].date)}</p>
+                <p>Time: {formatTime(order.orders[0].date)}</p>
+                <div>
+                  <ul>
+                    {products.map((product) => (
+                      <li key={product._id}>
+                        <p>Product Name: {product.title}</p>
+                        <p>Product Price: ${product.price}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={() => openTrackingModal(order)}>
+                  Track Order
+                </button>
+                {order.orders[0].transactionType === "Backlog" && (
+                  <button onClick={() => deleteOrder(order._id)}>
+                    Cancel Order
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-      {(user.userPermission === "supplier" || user.userPermission === "admin") && (
+      {(user.userPermission === "supplier" ||
+        user.userPermission === "admin") && (
         <div>
           <h2>Seller Orders</h2>
           <ul>

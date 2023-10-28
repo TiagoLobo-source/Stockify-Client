@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "./SignupPage.css";
 
-const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005'
+const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -39,32 +39,48 @@ function LoginPage(props) {
 
   return (
     <div className="Container">
-    <div className="SignupPage">
-      <div className="card">
-      <h1>Login</h1>
-
-      <form onSubmit={handleLoginSubmit}>
-      <div className="form-group">
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+      <div className="TwoColumnLayout">
+        {/* Left Column*/}
+        <div className="StyledSection">
+          <img src="123.png" alt="Random Image" />
+          <h1>Welcome to Our Website</h1>
+          <p>This is some styled content on the left side.</p>
         </div>
-        <div className="form-group">
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
- </div>
-        <button  className="button-signup" type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <div className="FormSection">
+          <div className="card">
+            <h1>Login</h1>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
-    </div>
+            <form onSubmit={handleLoginSubmit}>
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleEmail}
+                />
+              </div>
+              <div className="form-group">
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handlePassword}
+                />
+              </div>
+              <button className="button-signup" type="submit">
+                Login
+              </button>
+
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+              <p>Don't have an account yet?</p>
+              <Link to={"/signup"}> Sign Up</Link>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
