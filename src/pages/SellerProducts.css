@@ -45,13 +45,15 @@
 }
 
 .product-card button {
-  padding: 5px 10px;
-  border: none;
+  
+ 
   border-radius: 5px;
   cursor: pointer;
-  background-color: #4CAF50;
-  color: #fff;
-  font-weight: bold;
+  width: 100%;
+  margin: 0;
+  background-color:  #cfbcb3;
+  color: black;
+  font-weight: 1000;
 }
 
 .product-card .rejected {

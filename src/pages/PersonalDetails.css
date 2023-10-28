@@ -20,20 +20,21 @@
   
  
   form button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
+    width: 100%;
+    margin: 0;
+    background-color:  #cfbcb3;
+    color: black;
+    font-weight: 1000;
     cursor: pointer;
   }
   
 
   .edit-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
+    width: 100%;
+    margin: 0;
+    background-color:  #cfbcb3;
+    color: black;
+    font-weight: 1000;
     cursor: pointer;
   }
   

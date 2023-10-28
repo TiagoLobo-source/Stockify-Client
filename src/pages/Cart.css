@@ -66,22 +66,20 @@
   }
   
   .action-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-right: 10px;
+    width: 100%;
+    margin: 0;
+    background-color:  #cfbcb3;
+    color: black;
+    font-weight: 1000;
     cursor: pointer;
   }
   
   .checkout-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 10px;
+    width: 100%;
+    margin: 0;
+    background-color:  #cfbcb3;
+    color: black;
+    font-weight: 1000;
     cursor: pointer;
   }
   ul {
