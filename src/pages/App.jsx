@@ -21,7 +21,7 @@ function App() {
           <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div className="col-10 col-sm-8 col-lg-6">
               <img
-                src="images/hero.png"
+                src= {hero}
                 className="d-block mx-lg-auto img-fluid"
                 alt="Bootstrap Themes"
                 width="700"
@@ -97,95 +97,11 @@ function App() {
         </div>
       </div>
 
-      <div className="container px-4" style={{ paddingTop: '5%' }} id="custom-cards">
-        <h4>ALL PRODUCTS</h4>
-        <p style={{ color: '#737373', fontSize: '14px' }}>Showing 104358 products</p>
-        <div className=" row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-          <ProductCard
-            imageUrl="img/dyson.png"
-            title="Dyson Hair Wrap"
-            category="Electronics"
-            price="€120"
-          />
-        </div>
-      </div>
+      
     </div>
   );
 }
 
-function ProductCard({ imageUrl, title, category, price }) {
-    return (
-      <div className="col" style={{ margin: '20px 20px' }}>
-        <div className="card card-cover h-100 overflow-hidden text-white rounded-4 shadow-lg" style={{ backgroundColor: '#181412' }}>
-          <img src = {hero} className="card-img-top" alt={title} />
-          <div className="card-body p-4">
-            <h5 className="card-title" style={{ fontSize: '20px', fontWeight: 700 }}>
-              {title}
-            </h5>
-            <p style={{ fontSize: '16px', color: '#737373' }}>{category}</p>
-            <p className="card-text" style={{ fontSize: '24px', fontWeight: 700 }}>
-              {price}
-            </p>
-          </div>
-          <div className="card-footer" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <button
-              className="btn btn-outline-light"
-              style={{
-                border: '1px solid #F7ECE7',
-                borderRadius: '100px',
-                fontSize: '16px',
-                fontWeight: 700,
-              }}
-            >
-              ADD TO CART
-            </button>
-            <span
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: '14px',
-                color: '#737373',
-              }}
-            >
-              <i className="fas fa-laptop me-2"></i>
-              {category}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
 
 
 export default App;
