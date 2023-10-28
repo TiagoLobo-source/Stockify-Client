@@ -146,8 +146,8 @@ function OrderPage() {
           {order.orders[0]?.products.map((product) => (
             <div key={product.products._id}>
               <h3>Product Details</h3>
-              <p>Product Name: {product.products.name}</p>
-              <p>Product Price: ${product.products.price}</p>
+              <p>Product Name: {product.products[0].name}</p>
+              <p>Product Price: ${product.products[0].price}</p>
             </div>
           ))}
           <button onClick={() => openTrackingModal(order)}>
