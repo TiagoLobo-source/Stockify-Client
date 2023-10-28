@@ -66,6 +66,12 @@ function OrderPage() {
   }, [user]);
 
   useEffect(() => {
+    productsService
+      .getProduct(id)
+      .then((response) => {
+        setProduct(response.data);
+      })
+     
     if (user.userPermission === "supplier"|| user.userPermission === "admin") {
       console.log("Seller ID:", user._id);
       axios
@@ -143,11 +149,12 @@ function OrderPage() {
           </p>
           <p>Date: {formatDate(order.orders[0].date)}</p>
           <p>Time: {formatTime(order.orders[0].date)}</p>
-          {order.orders[0]?.products.map((product) => (
-            <div key={product.product}>
+          {order.orders[0]?.products.map((product, productIndex) => (
+            <div key={productIndex}>
               <h3>Product Details</h3>
               <p>Product Name: {product.product.title}</p>
               <p>Product Price: ${product.product.price}</p>
+              
             </div>
           ))}
           <button onClick={() => openTrackingModal(order)}>
