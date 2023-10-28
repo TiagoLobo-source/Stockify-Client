@@ -66,7 +66,7 @@ function OrderPage() {
   }, [user]);
 
   useEffect(() => {
-    if (user.userPermission === "supplier") {
+    if (user.userPermission === "supplier"|| user.userPermission === "admin") {
       console.log("Seller ID:", user._id);
       axios
         .get(`${API_URL}/api/orders/products/${user._id}`)
