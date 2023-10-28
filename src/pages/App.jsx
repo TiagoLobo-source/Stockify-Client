@@ -17,8 +17,8 @@ function App() {
       >
         <div style={{ maxHeight: "80%" }}>
           <div style={{ width: "80%", margin: "0 auto" }}>
-            <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
-              <div className="col-10 col-sm-8 col-lg-6">
+            <div className="row flex-lg-row-reverse align-items-center g-5 py-5" style={{marginLeft:"-25%"}}>
+              <div className="col-10 col-sm-8 col-lg-4">
                 <img
                   src={hero}
                   className="d-block mx-lg-auto img-fluid"
@@ -83,7 +83,7 @@ function App() {
           borderRadius: "10px",
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
           position: "relative",
-          top: "-40px",
+          top: "-20px",
         }}
       >
         <div className="row g-4 py-3 row-cols-1 row-cols-lg-2">
