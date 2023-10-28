@@ -66,6 +66,7 @@
   }
   
   .action-button {
+    margin-top: 10px;
     width: 100%;
     margin: 0;
     background-color:  #cfbcb3;
@@ -76,7 +77,7 @@
   
   .checkout-button {
     width: 100%;
-    margin: 0;
+    margin-top: 10px;
     background-color:  #cfbcb3;
     color: black;
     font-weight: 1000;
