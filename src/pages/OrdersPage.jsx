@@ -144,9 +144,9 @@ function OrderPage() {
           <p>Date: {formatDate(order.orders[0].date)}</p>
           <p>Time: {formatTime(order.orders[0].date)}</p>
           {order.orders[0]?.products.map((product) => (
-            <div key={product.products[0].product}>
+            <div key={product.product}>
               <h3>Product Details</h3>
-              <p>Product Name: {product.product.name}</p>
+              <p>Product Name: {product.product.title}</p>
               <p>Product Price: ${product.product.price}</p>
             </div>
           ))}
