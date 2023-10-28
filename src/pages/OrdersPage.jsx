@@ -66,38 +66,38 @@ function OrderPage() {
     }
   }, [user]);
 
-  useEffect(() => {
-    if (user.userPermission === "supplier" || user.userPermission === "admin") {
-      console.log("Seller ID:", user._id);
-      axios
-        .get(`${API_URL}/api/orders/products/${user._id}`)
-        .then((response) => {
-          console.log("Seller Orders:", response.data);
-          setUserOrders(response.data);
-  
-          
-          const productIds = response.data.map((order) => order.orders[0].products[0].product);
-  
-       
-          const productPromises = productIds.map((productId) =>
-            axios.get(`${API_URL}/api/products/${productId}`)
-          );
-  
-         
-          Promise.all(productPromises)
-            .then((productsData) => {
-              const productsArray = productsData.map((response) => response.data);
-              setProducts(productsArray);
-            })
-            .catch((error) => {
-              console.error("Error fetching product details:", error);
-            });
-        })
-        .catch((error) => {
-          console.error("Error fetching seller orders:", error);
-        });
-    }
-  }, [user]);
+
+    useEffect(() => {
+      if (user.userPermission === "supplier" || user.userPermission === "admin") {
+        console.log("Seller ID:", user._id);
+        axios
+          .get(`${API_URL}/api/orders/products/${user._id}`)
+          .then((response) => {
+            console.log("Seller Orders:", response.data);
+            setUserOrders(response.data);
+    
+            const productIds = response.data.map((order) => order.orders[0].products[0].product);
+    
+            const productPromises = productIds.map((productId) =>
+              axios.get(`${API_URL}/api/products/${productId}`)
+            );
+    
+            Promise.all(productPromises)
+              .then((productsData) => {
+                const productsArray = productsData.map((response) => response.data);
+                console.log("Fetched Products:", productsArray); // Add this line
+                setProducts(productsArray);
+              })
+              .catch((error) => {
+                console.error("Error fetching product details:", error);
+              });
+          })
+          .catch((error) => {
+            console.error("Error fetching seller orders:", error);
+          });
+      }
+    }, [user]);
+    
 
   function markOrderAsSent(orderId) {
     axios
@@ -163,7 +163,7 @@ function OrderPage() {
           <p>Time: {formatTime(order.orders[0].date)}</p>
           <div>
     <h2>Product Details</h2>
-    {console.log(products)}
+   
     <ul>
       {products.map((product) => (
         <li key={product._id}>
