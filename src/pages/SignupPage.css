@@ -10,7 +10,7 @@
 .TwoColumnLayout {
   display: flex;
   align-items: center;
-  max-width: 100%;
+  max-width: 80%;
 }
 
 
