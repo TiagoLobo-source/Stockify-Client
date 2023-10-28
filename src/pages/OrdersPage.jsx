@@ -163,6 +163,7 @@ function OrderPage() {
           <p>Time: {formatTime(order.orders[0].date)}</p>
           <div>
     <h2>Product Details</h2>
+    {console.log(products)}
     <ul>
       {products.map((product) => (
         <li key={product._id}>
