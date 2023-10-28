@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "./SignupPage.css";
+import hero from "../images/hero.png"
+
 
 const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
 
@@ -42,7 +44,7 @@ function LoginPage(props) {
       <div className="TwoColumnLayout">
         {/* Left Column*/}
         <div className="StyledSection">
-          <img src="123.png" alt="Random Image" />
+          <img src = {hero} alt="Random Image" />
           <h1>Welcome to Our Website</h1>
           <p>This is some styled content on the left side.</p>
         </div>
