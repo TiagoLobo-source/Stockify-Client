@@ -5,7 +5,8 @@ import productsService from "../services/ProductsService";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import Search from "../components/Search";
-import "./SellerProducts.css";
+import "../pages/ProductsList.css";
+
 
 const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
 
@@ -16,6 +17,15 @@ function SellerProducts() {
   const [filteredProducts2, setFiltered2Products] = useState([]);
   const path = useLocation();
   const [isChecked, setIsChecked] = useState(false);
+
+
+  function limitDescription(description, maxLength) {
+    if (description.length <= maxLength) {
+      return description;
+    } else {
+      return description.slice(0, maxLength) + "...";
+    }
+  }
 
   function getProducts() {
     // Fetch the data for all projects when the component first loads
@@ -91,7 +101,7 @@ function SellerProducts() {
   }
 
   return (
-    <div className="SellerProductsPage">
+    <div className="ProductsListPage">
       <label>
         <input
           type="checkbox"
@@ -104,22 +114,32 @@ function SellerProducts() {
       <div className="product-cards">
         {filteredProducts2.map((oneProduct) => (
           <div className="product-card" key={oneProduct._id}>
-            <h3>{oneProduct.title}</h3>
-            <h3>{oneProduct.description}</h3>
-            <p>
-              Date Created:{" "}
-              {new Date(oneProduct.createdAt).toLocaleDateString()}{" "}
-              {new Date(oneProduct.createdAt).toLocaleTimeString()}
-            </p>
-            <p>Price:  {oneProduct.price.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}</p> 
-            <img
-              src={oneProduct.imageProduct}
-              className="product-image"
-              alt="Product"
-            />
+          <div className={`small-card ${oneProduct.isPassed}`}>
+            {oneProduct.isPassed}
+          </div>
+      
+          <div className="title-container">
+            <Link to={`/productdetailspage/${oneProduct._id}`}>
+              <h3>{oneProduct.title}</h3>
+            </Link>
+          </div>
+          <p>{limitDescription(oneProduct.description, 30)}</p>
+          <h3>
+            {oneProduct.price.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </h3>
+          <img
+            src={oneProduct.imageProduct}
+            className="product-image"
+            alt="Product"
+          />
+          <br />
+          {user?.userPermission !== "user" && isLoggedIn && (
+            <h3>{oneProduct.isPassed}</h3>
+          )}
+      
             {user.userPermission !== "user" && (
               <div className="product-actions">
                 {!oneProduct.isApproved ? (
