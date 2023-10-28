@@ -152,21 +152,7 @@ function PersonalDetails() {
         <div className="content">
           <p>Name: {userData.name}</p>
           <p>Mobile Phone: {userData.mobilePhone}</p>
-          <p>
-            {(user.userPermission === "supplier" ||
-              user.userPermission === "admin" )? (
-              <>Date founded:</>
-            ) : (
-              <>Date of birth:</>
-            )}{" "}
-
-            {userData.dateOfBirth && (
-              <p>Date of birth: {userData.dateOfBirth.slice(0, 10)}</p>
-            )}
-
-            {/* {userData.dateOfBirth.slice(0, 10)} */}
-            {/* {userData.dateOfBirth} */}
-          </p>
+          
           <p>Address: {userData.address}</p>
           <p>Post Code: {userData.postCode}</p>
           <p>City: {userData.city}</p>
