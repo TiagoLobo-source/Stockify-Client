@@ -18,6 +18,7 @@ function App() {
  
       <div className="hero" style={{ width: '100%', height: '80vh', backgroundColor: '#F7ECE7' }}>
         <div className="container col-xxl-9 px-4 " style={{marginLeft: '15%'}}>
+        <div style={{ width: '80%', margin: '0 auto' }}>
           <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div className="col-10 col-sm-8 col-lg-6">
               <img
@@ -54,6 +55,7 @@ function App() {
                 </button>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
