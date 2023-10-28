@@ -1,48 +1,68 @@
-/* EditProduct.css */
-
 .card {
-    width: 80%;
-    max-width: 500px;
-    
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
- 
-  button:active {
-    width: 100%;
-    margin: 0;
-    background-color:  #827772;
-    color: black;
-    font-weight: 1000;
-  }
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  text-align: center;
+}
 
-  .success-message {
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button.submit-button, button.delete-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.submit-button {
+  background-color: #007BFF;
+}
+
+button.submit-button:hover {
+  background-color: #0056b3;
+}
+
+button.delete-button {
+  background-color: #FF0000;
+}
+
+button.delete-button:hover {
+  background-color: #CC0000;
+}
+
+.success-message {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+}
