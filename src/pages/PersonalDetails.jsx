@@ -153,8 +153,8 @@ function PersonalDetails() {
           <p>Name: {userData.name}</p>
           <p>Mobile Phone: {userData.mobilePhone}</p>
           <p>
-            {user.userPermission === "supplier" ||
-              user.userPermission === "admin" ? (
+            {(user.userPermission === "supplier" ||
+              user.userPermission === "admin" )? (
               <>Date founded:</>
             ) : (
               <>Date of birth:</>
