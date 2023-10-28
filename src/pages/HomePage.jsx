@@ -23,7 +23,7 @@ const Content = styled.main`
 `;
 
 const Footer = styled.footer`
-  background-color: #F7ECE7;
+  background-color: white;
   color: black;
   padding: 10px;
   text-align: center;
