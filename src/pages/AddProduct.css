@@ -20,7 +20,7 @@
   
   .AddProduct input,
   .AddProduct select {
-    width: 100%;
+    width: 20%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -28,7 +28,7 @@
   }
   
   .AddProduct button {
-    width: 100%;
+    width: 20%;
     margin: 0;
     background-color:  #cfbcb3;
     color: black;

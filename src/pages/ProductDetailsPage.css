@@ -35,7 +35,7 @@
 }
 
 .product-card button {
-  width: 100%;
+  width: 20%;
   margin: 0;
   background-color:  #cfbcb3;
   color: black;
@@ -50,9 +50,9 @@
 }
 
 .product-card button:hover {
-  background-color: #0056b3;
+  background-color: #7d726c;
 }
 
 .product-card button:active {
-  background-color: #0056b3;
+  background-color: #807570;
 }
