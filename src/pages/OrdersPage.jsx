@@ -3,7 +3,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import { AuthContext } from "../context/auth.context";
 import productsService from "../services/ProductsService";
-
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
 
