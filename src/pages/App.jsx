@@ -46,7 +46,7 @@ function App() {
                   and wool blend bestseller beanies.
                 </p>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                  <Link to="/products" className="nav-link">
+                  <Link to="/productshome" className="nav-link">
                     <button
                       style={{
                         border: "1px solid #181412",
